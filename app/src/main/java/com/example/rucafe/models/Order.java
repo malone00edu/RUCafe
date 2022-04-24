@@ -22,6 +22,7 @@ public class Order implements Customizable{
     private MenuItem menuItem = new MenuItem(1);
     private int orderId;
     private ArrayList<MenuItem> orderList;
+    private static Order currentOrder;
 
     /**
      * Creates an Order object that stores information for added menu items.
@@ -154,6 +155,25 @@ public class Order implements Customizable{
      * Creates a string that is formatted with Order object information.
      * @return String with Order information
      */
+
+    /**
+     * Creates an Order instance if one does not exist.
+     * @return The created Order instance.
+     */
+    public static Order getCurrentOrder() {
+        if(currentOrder == null) {
+            currentOrder = new Order();
+        }
+        return currentOrder;
+    }
+
+    /**
+     * Submits the current order to StoreOrders.
+     */
+    public void submitOrder() {
+        StoreOrders.getCurrentOrder().add(this);
+        currentOrder = null;
+    }
     @Override
     public String toString() {
         String orderStringFormat = "";

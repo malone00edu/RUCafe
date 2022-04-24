@@ -6,10 +6,13 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.rucafe.activities.CoffeeActivity;
-import com.example.rucafe.activities.DonutActivity;
-import com.example.rucafe.activities.OrderActivity;
-import com.example.rucafe.activities.StoreActivity;
+import com.example.rucafe.activities.*;
+import com.example.rucafe.models.Customizable;
+import com.example.rucafe.models.Donut;
+import com.example.rucafe.models.DonutType;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 
 /**
@@ -17,6 +20,8 @@ import com.example.rucafe.activities.StoreActivity;
  * @author Lily Chang
  */
 public class MainActivity extends AppCompatActivity {
+
+    private static final int ZERO = 0;
 
     // XML References
     private ImageButton coffeeImageButton;
@@ -76,7 +81,21 @@ public class MainActivity extends AppCompatActivity {
      * Navigate to the OrderingDonutActivity
      */
     void navigateToOrderingDonut() {
+        ArrayList<Donut> donuts = new ArrayList<>();
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_1()));
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_2()));
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_3()));
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_4()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_1()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_2()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_3()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_4()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_1()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_2()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_3()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_4()));
         Intent gotoOrderDonut = new Intent(this, DonutActivity.class);
+        gotoOrderDonut.putExtra("Donuts", donuts);
         startActivity(gotoOrderDonut);
     }
 
@@ -95,4 +114,7 @@ public class MainActivity extends AppCompatActivity {
         Intent gotoStoreOrders = new Intent(this, StoreActivity.class);
         startActivity(gotoStoreOrders);
     }
+
+    //private Donut setupDonutObjects(Donut donuts) {
+    //}
 }

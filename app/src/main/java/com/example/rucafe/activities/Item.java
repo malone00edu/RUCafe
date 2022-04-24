@@ -10,21 +10,26 @@ public class Item implements Serializable {
 	private String itemName;
 	private int image;
 	private String unitPrice; //for demo purpose, the unitPrice is of String type
+	private int itemQuantity; //This is new - Taze
+
 
 	/**
 	 * Parameterized constructor.
+	 *
 	 * @param itemName
 	 * @param image
 	 * @param unitPrice
 	 */
-	public Item(String itemName, int image, String unitPrice) {
+	public Item(String itemName, int image, String unitPrice, int itemQuantity) { //Added itemQuantity
 		this.itemName = itemName;
 		this.image = image;
 		this.unitPrice = unitPrice;
+		this.itemQuantity = itemQuantity; //This is new - Taze
 	}
 
 	/**
 	 * Getter method that returns the item name of an item.
+	 *
 	 * @return the item name of an item.
 	 */
 	public String getItemName() {
@@ -33,6 +38,7 @@ public class Item implements Serializable {
 
 	/**
 	 * Getter method that returns the image of an item.
+	 *
 	 * @return the image of an item.
 	 */
 	public int getImage() {
@@ -41,9 +47,19 @@ public class Item implements Serializable {
 
 	/**
 	 * Getter method that returns the unit price.
+	 *
 	 * @return the unit price of the item.
 	 */
 	public String getUnitPrice() {
 		return unitPrice;
 	}
+
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+
+	public void setItemQuantity(int itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
 }
+

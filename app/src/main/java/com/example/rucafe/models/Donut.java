@@ -1,10 +1,12 @@
 package com.example.rucafe.models;
 
+import java.io.Serializable;
+
 /**
  * Stores information for a donut order.
  * @author Taze Balbosa, Yulie Ying
  */
-public class Donut extends MenuItem{
+public class Donut extends MenuItem implements Serializable {
     private static final double INITIAL_PRICE = 0;
 
     private String donutType, donutFlavor;

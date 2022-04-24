@@ -13,7 +13,8 @@ import com.example.rucafe.R;
  * Get the name of the item from an intent extra. The text of the button is set to the item name.
  * @author Lily Chang
  */
-public class ItemSelectedActivity extends AppCompatActivity {
+public class
+ItemSelectedActivity extends AppCompatActivity {
     private Button btn_itemName;
 
     @Override

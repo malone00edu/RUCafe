@@ -16,6 +16,7 @@ public class StoreOrders implements Customizable {
     private int orderId = INITIAL_ID;
     private Order order = new Order();
     protected ArrayList<Order> orderBook;
+    private static StoreOrders currentStoreOrder = null;
 
     /**
      * Creates a StoreOrders object that stores information for placed orders.
@@ -103,6 +104,13 @@ public class StoreOrders implements Customizable {
             return false;
         }
         return true;
+    }
+
+    public static StoreOrders getCurrentOrder() {
+        if (currentStoreOrder == null) {
+            currentStoreOrder = new StoreOrders();
+        }
+        return currentStoreOrder;
     }
 
     /**

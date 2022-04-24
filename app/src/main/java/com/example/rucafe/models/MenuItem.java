@@ -1,10 +1,12 @@
 package com.example.rucafe.models;
 
+import java.io.Serializable;
+
 /**
  * Stores information for a menu order. Subclass of all other menu items.
  * @author Taze Balbosa, Yulie Ying
  */
-public class MenuItem {
+public class MenuItem implements Serializable {
 
     private static final double INITIAL_PRICE = 0;
     protected double price;
@@ -34,6 +36,7 @@ public class MenuItem {
     public  void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    public int getQuantity() { return this.quantity; }
 
     public void itemPrice() {}
 

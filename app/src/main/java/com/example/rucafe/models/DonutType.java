@@ -1,17 +1,19 @@
 package com.example.rucafe.models;
 
+import java.io.Serializable;
+
 /**
  * Contains  donut type information.
  * @author Taze Balbosa, Yulie Ying
  */
-public enum DonutType {
-    YEAST_DONUT("Yeast Donut",1.59, "Maple", "Glazed", "Chocolate Glazed"),
-    CAKE_DONUT("Cake Donut", 1.79, "Vanilla","Boston Creme","Chocolate Glazed"),
-    DONUT_HOLE("Donut Hole", 0.39, "Custard", "Lemon Cream","Strawberry Jelly" );
+public enum DonutType implements Serializable {
+    YEAST_DONUT("Yeast Donut",1.59, "Maple", "Glazed", "Vanilla Glazed", "Chocolate Glazed"),
+    CAKE_DONUT("Cake Donut", 1.79, "Maple", "Vanilla", "Boston Creme", "Chocolate Glazed"),
+    DONUT_HOLE("Donut Hole", 0.39, "Custard", "Lemon Cream", "Raspberry", "Strawberry Jelly" );
 
 
     final private double price;
-    final private String name, flavor_1, flavor_2, flavor_3;
+    final private String name, flavor_1, flavor_2, flavor_3, flavor_4;
 
     /**
      * Creates a DonutType object storing donut type information.
@@ -20,13 +22,15 @@ public enum DonutType {
      * @param flavor_1 First flavor of donut type.
      * @param flavor_2 Second flavor of donut type.
      * @param flavor_3 Third flavor of donut type.
+     * @param flavor_4 Fourth flavor of donut type.
      */
-    DonutType(String name, double price, String flavor_1, String flavor_2, String flavor_3 ) {
+    DonutType(String name, double price, String flavor_1, String flavor_2, String flavor_3, String flavor_4) {
         this.name = name;
         this.price = price;
         this.flavor_1 = flavor_1;
         this.flavor_2 = flavor_2;
         this.flavor_3 = flavor_3;
+        this.flavor_4 = flavor_4;
     }
 
     /**
@@ -68,11 +72,19 @@ public enum DonutType {
     }
 
     /**
+     * Returns the fourth flavor of donut type.
+     * @return Fourth flavor.
+     */
+    public String getFlavor_4() {
+        return flavor_4; }
+
+    /**
      * Returns string format of the donut type's name and flavors.
      * @return String of donut type name and flavors.
      */
     @Override
     public String toString() {
-        return  name + "::" + "$" + price + "::" + flavor_1 + ", " + flavor_2 + ", " + flavor_3;
+        return  name + "::" + "$" + price + "::" + flavor_1 + ", " + flavor_2 + ", " +
+                flavor_3 + ", " + flavor_4;
     }
 }

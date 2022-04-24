@@ -1,24 +1,25 @@
 package com.example.rucafe.activities;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rucafe.R;
+import com.example.rucafe.models.Donut;
+import com.example.rucafe.models.DonutType;
+import com.example.rucafe.models.OnItemsClickListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 /**
  * This is an Adapter class to be used to instantiate an adapter for the RecyclerView.
  * Must extend RecyclerView.Adapter, which will enforce you to implement 3 methods:
@@ -31,10 +32,16 @@ import java.util.ArrayList;
  * you do something similar to the onCreate() method in an Activity.
  * @author Lily Chang
  */
-class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>{
+ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
+    private static final int ZERO = 0;
+    private OnItemsClickListener addListener = null;
+    private OnItemsClickListener removeListener = null;
+    Item addItem, removeItem;
+    DonutActivity adapter;
+
     private Context context; //need the context to inflate the layout
     private ArrayList<Item> items; //need the data binding to each row of RecyclerView
-
+    private ArrayList<Donut> viewDonuts;
     public ItemsAdapter(Context context, ArrayList<Item> items) {
         this.context = context;
         this.items = items;
@@ -52,9 +59,13 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>{
         //inflate the row layout for the items
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
-
+        viewDonuts = createDonuts();
+        adapter = new DonutActivity();
         return new ItemsHolder(view);
+
+
     }
+
 
     /**
      * Assign data values for each row according to their "position" (index) when the item becomes
@@ -68,6 +79,9 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>{
         holder.tv_name.setText(items.get(position).getItemName());
         holder.tv_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
+        holder.tv_quantity.setText(String.valueOf(items.get(position).getItemQuantity()));
+        addItem = items.get(position);
+        removeItem = items.get(position);
     }
 
     /**
@@ -79,23 +93,31 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>{
         return items.size(); //number of MenuItem in the array list.
     }
 
+
+
     /**
      * Get the views from the row layout file, similar to the onCreate() method.
      */
-    public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_price;
+    public class ItemsHolder extends RecyclerView.ViewHolder {
+        private TextView tv_name, tv_price, tv_quantity;
         private ImageView im_item;
-        private Button btn_add;
+        private Button btn_add, btn_remove;
         private ConstraintLayout parentLayout; //this is the row layout
+
+        int itemQuantity = ZERO;
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_flavor);
             tv_price = itemView.findViewById(R.id.tv_price);
+            tv_quantity = itemView.findViewById(R.id.tv_quantity);
             im_item = itemView.findViewById(R.id.im_item);
             btn_add = itemView.findViewById(R.id.btn_add);
+            btn_remove = itemView.findViewById(R.id.btn_remove);
             parentLayout = itemView.findViewById(R.id.rowLayout);
-            setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
+            tv_quantity.setText("0");
+            setAddButtonOnClick(); //register the onClicklistener for the button on each row.
+            setRemoveButtonOnClick();
 
             /* set onClickListener for the row layout,
              * clicking on a row will navigate to another Activity
@@ -113,32 +135,70 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>{
         /**
          * Set the onClickListener for the button on each row.
          * Clicking on the button will create an AlertDialog with the options of YES/NO.
-         * @param itemView
+         *
          */
-        private void setAddButtonOnClick(@NonNull View itemView) {
+
+        private void setAddButtonOnClick() {
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
-                    alert.setMessage(tv_name.getText().toString());
-                    //handle the "YES" click
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-                        }
-                        //handle the "NO" click
-                    }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    AlertDialog dialog = alert.create();
-                    dialog.show();
+                    itemQuantity++;
+                    tv_quantity.setText(String.valueOf(itemQuantity));
+                    items.get(getAdapterPosition()).setItemQuantity(itemQuantity);
+                    viewDonuts.get(getAdapterPosition()).setQuantity(itemQuantity);
+                    if (addListener != null) {
+                        addListener.onItemClick(addItem);
+                    }
                 }
             });
+        }
+
+        private void setRemoveButtonOnClick() {
+            btn_remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (itemQuantity > ZERO) {
+                        itemQuantity--;
+                        tv_quantity.setText(String.valueOf(itemQuantity));
+                        items.get(getAdapterPosition()).setItemQuantity(itemQuantity);
+                        viewDonuts.get(getAdapterPosition()).setQuantity(itemQuantity);
+                        if (removeListener != null) {
+                            removeListener.onItemClick(removeItem);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    private ArrayList<Donut> createDonuts() {
+        ArrayList<Donut> donuts = new ArrayList<>();
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_1()));
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_2()));
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_3()));
+        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_4()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_1()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_2()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_3()));
+        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_4()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_1()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_2()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_3()));
+        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_4()));
+        return donuts;
+    }
+
+    public void setOnItemClickListenerAdd(OnItemsClickListener addListener) {
+        this.addListener = addListener;
+    }
+
+    public void setOnItemsClickListenerRemove(OnItemsClickListener removeListener) {
+        this.removeListener = removeListener;
+    }
+
+    public static class onItemClickListener implements OnItemsClickListener {
+        @Override
+        public void onItemClick(Item items) {
         }
     }
 }

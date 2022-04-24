@@ -4,7 +4,7 @@ package com.example.rucafe.models;
  * Stores information for a coffee order.
  * @author Taze Balbosa, Yulie Ying
  */
-public class Coffee extends MenuItem{
+public class Coffee extends MenuItem implements Customizable{
 
     private static final int ZERO_AMOUNT = 0;
     private static final double INITIAL_PRICE = CoffeeSize.SHORT.getPrice();
