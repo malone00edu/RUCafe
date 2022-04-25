@@ -12,6 +12,9 @@ import com.example.rucafe.models.Order;
 
 import java.text.DecimalFormat;
 
+/**
+ *
+ */
 public class OrderActivity extends AppCompatActivity {
     private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("$###,##0.00");
 
@@ -22,6 +25,10 @@ public class OrderActivity extends AppCompatActivity {
     private MenuItem currentItem;
     double total, subtotal, salesTax;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
@@ -39,6 +46,9 @@ public class OrderActivity extends AppCompatActivity {
         lv_orderListView.setSelector(R.color.design_default_color_primary);
     }
 
+    /**
+     *
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -63,24 +73,24 @@ public class OrderActivity extends AppCompatActivity {
         });
 
         // Update UI and recompute price
-        this.updateUI();
+        this.refreshUI();
         this.calculateAndDisplayPrice();
     }
 
     /**
-     * Remove selected item from order
+     *
      */
     private void removeItemFromOrder() {
         currentOrder.remove(this.currentItem);
         // Update UI and recompute price
-        this.updateUI();
+        this.refreshUI();
         this.calculateAndDisplayPrice();
     }
 
     /**
-     * Update UI, clear selections and repopulate order listview. Also check if placeOrder should be disabled
+     *
      */
-    private void updateUI() {
+    private void refreshUI() {
         // Update UI
         lv_orderListView.clearChoices();
         lv_orderListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentOrder.getOrderList()));
@@ -91,7 +101,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     /**
-     * Recompute all the prices and update text boxes
+     *
      */
     private void calculateAndDisplayPrice() {
         // reset subtotal and recalc
@@ -111,7 +121,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     /**
-     * Place the order, updating StoreOrders.
+     *
      */
     private void placeOrder() {
         // finalize the store order, which adds it to StoreOrders
