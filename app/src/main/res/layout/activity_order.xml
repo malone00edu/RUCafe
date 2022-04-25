@@ -19,7 +19,7 @@
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:ems="10"
-                    android:id="@+id/tv_titleOrderName"
+                    android:id="@+id/tv_titleStoreOrders"
                     android:text="@string/orders_page_title"
                     android:textSize="20sp"
                     android:textColor="@color/design_default_color_primary_dark"
