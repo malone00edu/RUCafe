@@ -33,12 +33,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Coffee coffee = new Coffee(INITIAL_QTY, CoffeeSize.SHORT.getName(), INITIAL_ADD_IN_QTY,
             INITIAL_ADD_IN_QTY, INITIAL_ADD_IN_QTY, INITIAL_ADD_IN_QTY, INITIAL_ADD_IN_QTY);
 
+    private int quantity = 0;
+    private String coffeeSize = "";
+
     private String coffeePrice = "";
     private int coffeeQuantity = ZERO;
 
     private Spinner coffeeSizeSpinner, coffeeQtySpinner;
-
-    private int[] coffeeQty = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
     private CheckBox creamCheckBox, milkCheckBox, whippedCheckBox, caramelCheckBox, syrupCheckBox;
     private TextView creamAmtNum, milkAmtNum, whippedAmtNum, caramelAmtNum, syrupAmtNum, coffeeSubTotal;
@@ -78,8 +79,8 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         caramelAmtNum = findViewById(R.id.caramelAmtNum);
         syrupAmtNum = findViewById(R.id.syrupAmtNum);
 
-        coffeeSubTotal = (TextView) findViewById(R.id.coffeeSubtotalNum);
-        coffeeSubTotal.setText(calculateAndDisplayPrice());
+        coffeeSubTotal = findViewById(R.id.coffeeSubtotalNum);
+        coffeeSubTotal.setText("0.00");
 
         ArrayAdapter<CharSequence> coffeeSizeAdapter = ArrayAdapter.createFromResource(this, R.array.coffeeSizeNames, android.R.layout.simple_spinner_item);
         coffeeSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -134,17 +135,23 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
 
-        if (view.getId() == R.id.coffeeQtySpinner) {
-            coffee.setQuantity((Integer)adapterView.getItemAtPosition(i));
+        switch(adapterView.getId()) {
+            case R.id.coffeeSizeSpinner:
+                coffee.setCoffeeSize(text);
+                break;
+            case R.id.coffeeQtySpinner:
+                coffee.setQuantity(Integer.parseInt(text));
+                break;
+            default:
+
         }
 
         coffeeSubTotal.setText(calculateAndDisplayPrice());
-        Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        coffeeSubTotal.setText("0.00");
+
     }
 
     @Override
@@ -155,10 +162,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                     addCreamBtn.setVisibility(View.VISIBLE);
                     rmvCreamBtn.setVisibility(View.VISIBLE);
                     creamAmtNum.setVisibility(View.VISIBLE);
+                    creamAmtNum.setText(Integer.toString(coffee.getCream()));
                 } else {
                     addCreamBtn.setVisibility(View.GONE);
                     rmvCreamBtn.setVisibility(View.GONE);
                     creamAmtNum.setVisibility(View.GONE);
+                    coffee.setCream(ZERO);
+                    creamAmtNum.setText(Integer.toString(coffee.getCream()));
                 }
                 break;
             case R.id.milkCheckBox:
@@ -166,10 +176,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                     addMilkBtn.setVisibility(View.VISIBLE);
                     rmvMilkBtn.setVisibility(View.VISIBLE);
                     milkAmtNum.setVisibility(View.VISIBLE);
+                    milkAmtNum.setText(Integer.toString(coffee.getMilk()));
                 } else {
                     addMilkBtn.setVisibility(View.GONE);
                     rmvMilkBtn.setVisibility(View.GONE);
                     milkAmtNum.setVisibility(View.GONE);
+                    coffee.setMilk(ZERO);
+                    milkAmtNum.setText(Integer.toString(coffee.getMilk()));
                 }
                 break;
             case R.id.whippedCheckBox:
@@ -177,10 +190,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                     addWhippedBtn.setVisibility(View.VISIBLE);
                     rmvWhippedBtn.setVisibility(View.VISIBLE);
                     whippedAmtNum.setVisibility(View.VISIBLE);
+                    whippedAmtNum.setText(Integer.toString(coffee.getWhippedCream()));
                 } else {
                     addWhippedBtn.setVisibility(View.GONE);
                     rmvWhippedBtn.setVisibility(View.GONE);
                     whippedAmtNum.setVisibility(View.GONE);
+                    coffee.setWhippedCream(ZERO);
+                    whippedAmtNum.setText(Integer.toString(coffee.getWhippedCream()));
                 }
                 break;
             case R.id.caramelCheckBox:
@@ -188,10 +204,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                     addCaramelBtn.setVisibility(View.VISIBLE);
                     rmvCaramelBtn.setVisibility(View.VISIBLE);
                     caramelAmtNum.setVisibility(View.VISIBLE);
+                    caramelAmtNum.setText(Integer.toString(coffee.getCaramel()));
                 } else {
                     addCaramelBtn.setVisibility(View.GONE);
                     rmvCaramelBtn.setVisibility(View.GONE);
                     caramelAmtNum.setVisibility(View.GONE);
+                    coffee.setCaramel(ZERO);
+                    caramelAmtNum.setText(Integer.toString(coffee.getCaramel()));
                 }
                 break;
             case R.id.syrupCheckBox:
@@ -199,10 +218,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                     addSyrupBtn.setVisibility(View.VISIBLE);
                     rmvSyrupBtn.setVisibility(View.VISIBLE);
                     syrupAmtNum.setVisibility(View.VISIBLE);
+                    syrupAmtNum.setText(Integer.toString(coffee.getSyrup()));
                 } else {
                     addSyrupBtn.setVisibility(View.GONE);
                     rmvSyrupBtn.setVisibility(View.GONE);
                     syrupAmtNum.setVisibility(View.GONE);
+                    coffee.setSyrup(ZERO);
+                    syrupAmtNum.setText(Integer.toString(coffee.getSyrup()));
                 }
                 break;
             default:
@@ -220,22 +242,22 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                 break;
             case R.id.addMilkBtn:
                 coffee.add("Milk");
-                creamAmtNum.setText(Integer.toString(coffee.getMilk()));
+                milkAmtNum.setText(Integer.toString(coffee.getMilk()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.addWhippedBtn:
                 coffee.add("Whipped Cream");
-                creamAmtNum.setText(Integer.toString(coffee.getWhippedCream()));
+                whippedAmtNum.setText(Integer.toString(coffee.getWhippedCream()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.addCaramelBtn:
                 coffee.add("Caramel");
-                creamAmtNum.setText(Integer.toString(coffee.getCaramel()));
+                caramelAmtNum.setText(Integer.toString(coffee.getCaramel()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.addSyrupBtn:
                 coffee.add("Syrup");
-                creamAmtNum.setText(Integer.toString(coffee.getSyrup()));
+                syrupAmtNum.setText(Integer.toString(coffee.getSyrup()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.rmvCreamBtn:
@@ -245,22 +267,22 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                 break;
             case R.id.rmvMilkBtn:
                 coffee.remove("Milk");
-                creamAmtNum.setText(Integer.toString(coffee.getMilk()));
+                milkAmtNum.setText(Integer.toString(coffee.getMilk()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.rmvWhippedBtn:
                 coffee.remove("Whipped Cream");
-                creamAmtNum.setText(Integer.toString(coffee.getWhippedCream()));
+                whippedAmtNum.setText(Integer.toString(coffee.getWhippedCream()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.rmvCaramelBtn:
                 coffee.remove("Caramel");
-                creamAmtNum.setText(Integer.toString(coffee.getCaramel()));
+                caramelAmtNum.setText(Integer.toString(coffee.getCaramel()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.rmvSyrupBtn:
                 coffee.remove("Syrup");
-                creamAmtNum.setText(Integer.toString(coffee.getSyrup()));
+                syrupAmtNum.setText(Integer.toString(coffee.getSyrup()));
                 coffeeSubTotal.setText(calculateAndDisplayPrice());
                 break;
             case R.id.addCoffeeToOrderBtn:
@@ -300,11 +322,9 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     private String calculateAndDisplayPrice() {
-        double totalPrice = 0;
+        coffee.itemPrice();
 
-        this.coffee.itemPrice();
-
-        coffeePrice = DECIMAL_FORMAT.format(totalPrice);
+        coffeePrice = DECIMAL_FORMAT.format(coffee.getPrice());
         return coffeePrice;
     }
 
