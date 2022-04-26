@@ -73,6 +73,10 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         rcview.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setOnItemClickListenerAdd(new ItemsAdapter.onItemClickListener(){
+            /**
+             * Listener method for calculating price of donuts from adding.
+             * @param items Donuts
+             */
             @Override
             public void onItemClick(Item items){
                 //Set your TextView here when card is Clicked on
@@ -84,6 +88,10 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         });
 
         adapter.setOnItemClickListenerRemove(new ItemsAdapter.onItemClickListener(){
+            /**
+             * Listener method for calculating price of donuts from removing.
+             * @param items Donuts.
+             */
             @Override
             public void onItemClick(Item items){
                 //Set your TextView here when card is Clicked on
@@ -95,12 +103,21 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         });
 
         addToOrder.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listener method for donut UI buttons.
+             * @param view The view that was clicked.
+             */
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
                 alert.setTitle("Add to order");
                 //handle the "YES" click
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    /**
+                     * Listener method for adding donuts to order.
+                     * @param dialog the dialog that received the click.
+                     * @param which the button that was clicked or the position of the item clicked.
+                     */
                     public void onClick(DialogInterface dialog, int which) {
                         for (Item selectedDonutItem : donutItems) {
                             tallySelectedDonuts(selectedDonutItem, donuts);
@@ -122,6 +139,11 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
                     }
                     //handle the "NO" click
                 }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    /**
+                     * Listener method for not adding donuts to order.
+                     * @param dialog the dialog that received the click.
+                     * @param which the button that was clicked or the position of the item clicked.
+                     */
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(DonutActivity.this,
                                 " Donut(s) was not added to your order.", Toast.LENGTH_LONG).show();

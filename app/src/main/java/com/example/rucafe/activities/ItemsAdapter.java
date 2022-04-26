@@ -192,7 +192,7 @@ import java.util.ArrayList;
         this.addListener = addListener;
     }
 
-    public void setOnItemsClickListenerRemove(OnItemsClickListener removeListener) {
+    public void setOnItemClickListenerRemove(OnItemsClickListener removeListener) {
         this.removeListener = removeListener;
     }
 
