@@ -17,6 +17,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import com.example.rucafe.models.*;
 
+/**
+ * Activity for Donut ordering GUI display.
+ * @author Taze Balbosa, Yulie Ying
+ */
 public class DonutActivity extends AppCompatActivity implements OnItemsClickListener{
 
 
@@ -50,7 +54,7 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
     /**
      * Get the references of all instances of Views defined in the layout file, set up the list of
      * items to be display in the RecyclerView.
-     * @param savedInstanceState
+     * @param savedInstanceState Contains the previous pages loaded.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,7 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
             }
         });
 
-        adapter.setOnItemsClickListenerRemove(new ItemsAdapter.onItemClickListener(){
+        adapter.setOnItemClickListenerRemove(new ItemsAdapter.onItemClickListener(){
             @Override
             public void onItemClick(Item items){
                 //Set your TextView here when card is Clicked on
@@ -129,6 +133,11 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         });
     }
 
+    /**
+     * Helper method that updates the Donut object from Item object's selected quantity.
+     * @param selectedDonutItem The quantity selected from a donut Item.
+     * @param donuts The chosen Donut object whose quantity will be updated.
+     */
     private void tallySelectedDonuts(Item selectedDonutItem, ArrayList<Donut> donuts) {
         switch (selectedDonutItem.getItemName()) {
             case "Yeast Donut: Maple":
@@ -183,6 +192,10 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         return items;
     }
 
+    /**
+     * Calculates the price of the current donut order to be displayed.
+     * @return
+     */
     private String calculateAndDisplayPrice() {
         double totalPrice = 0;
         for (Donut donut : donuts) {
@@ -193,11 +206,18 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         return donutsPriceString;
     }
 
+    /**
+     * The listener method that must be implemented from OnItemsClickListener interface.
+     * @param items
+     */
     @Override
     public void onItemClick(Item items) {
 
     }
 
+    /**
+     * Returns the user to the main activity of this app.
+     */
     private void returnToMainActivity() {
         Intent goToMainActivity = new Intent(this, MainActivity.class);
         startActivity(goToMainActivity);
