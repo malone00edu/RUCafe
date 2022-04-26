@@ -32,8 +32,8 @@ public class OrderActivity extends AppCompatActivity {
         tv_subtotal = (TextView) findViewById(R.id.tv_subtotalOrder);
         tv_salesTax = (TextView) findViewById(R.id.tv_salesTaxOrder);
         lv_orderListView = (ListView) findViewById(R.id.lv_listOrder);
-        btn_placeOrder = (Button) findViewById(R.id.btn_placeOrder);
-        btn_removeItem = (Button) findViewById(R.id.btn_removeItemOrder);
+        btn_placeOrder = (Button) findViewById(R.id.btn_showOrder);
+        btn_removeItem = (Button) findViewById(R.id.btn_removeStoreOrder);
 
         lv_orderListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         lv_orderListView.setSelector(R.color.design_default_color_primary);
@@ -55,11 +55,13 @@ public class OrderActivity extends AppCompatActivity {
         // Remove item from order listener
         btn_removeItem.setOnClickListener(v -> {
             this.removeItemFromOrder();
+            Toast.makeText(OrderActivity.this, "Item removed.", Toast.LENGTH_LONG).show();
         });
 
         // Place order listener
         btn_placeOrder.setOnClickListener(v -> {
             this.placeOrder();
+            Toast.makeText(OrderActivity.this, "Order placed.", Toast.LENGTH_LONG).show();
         });
 
         // Update UI and recompute price

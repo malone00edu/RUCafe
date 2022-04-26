@@ -124,7 +124,7 @@
             <Button
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn_removeItemOrder"
+                    android:id="@+id/btn_removeStoreOrder"
                     android:text="@string/remove_selected_item"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"/>
@@ -135,7 +135,7 @@
             <Button
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn_placeOrder"
+                    android:id="@+id/btn_showOrder"
                     android:text="@string/place_order"
                     android:layout_weight="1"
                     android:layout_marginEnd="10dp"/>
