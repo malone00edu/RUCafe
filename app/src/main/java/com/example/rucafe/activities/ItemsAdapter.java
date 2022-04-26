@@ -1,36 +1,24 @@
 package com.example.rucafe.activities;
 
 import android.content.Context;
-import android.content.Intent;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rucafe.R;
-import com.example.rucafe.models.Donut;
-import com.example.rucafe.models.DonutType;
 import com.example.rucafe.models.OnItemsClickListener;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 /**
  * This is an Adapter class to be used to instantiate an adapter for the RecyclerView.
  * Must extend RecyclerView.Adapter, which will enforce you to implement 3 methods:
  *      1. onCreateViewHolder, 2. onBindViewHolder, and 3. getItemCount
- *
- * You must use the data type <thisClassName.yourHolderName>, in this example
- * <ItemAdapter.ItemHolder>. This will enforce you to define a constructor for the
- * ItemAdapter and an inner class ItemsHolder (a static class)
- * The ItemsHolder class must extend RecyclerView.ViewHolder. In the constructor of this class,
- * you do something similar to the onCreate() method in an Activity.
- * @author Lily Chang
+ * @author Taze Balbosa, Yulie Ying
  */
  public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
     private static final int ZERO = 0;
@@ -39,14 +27,18 @@ import java.util.ArrayList;
     Item addItem, removeItem;
     DonutActivity adapter;
 
-    private Context context; //need the context to inflate the layout
-    private ArrayList<Item> items; //need the data binding to each row of RecyclerView
-    private ArrayList<Donut> viewDonuts;
+    private Context context;
+    private ArrayList<Item> items;
+
+    /**
+     * Constructor used to initialize the adapter with an arraylist of items.
+     * @param context Used to initialize the adapter.
+     * @param items An arraylist of item objects.
+     */
     public ItemsAdapter(Context context, ArrayList<Item> items) {
         this.context = context;
         this.items = items;
     }
-
     /**
      * This method will inflate the row layout for the items in the RecyclerView
      * @param parent
@@ -56,14 +48,10 @@ import java.util.ArrayList;
     @NonNull
     @Override
     public ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //inflate the row layout for the items
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
-        viewDonuts = createDonuts();
         adapter = new DonutActivity();
         return new ItemsHolder(view);
-
-
     }
 
 
@@ -82,6 +70,8 @@ import java.util.ArrayList;
         holder.tv_quantity.setText(String.valueOf(items.get(position).getItemQuantity()));
         addItem = items.get(position);
         removeItem = items.get(position);
+        holder.setAddButtonOnClick();
+        holder.setRemoveButtonOnClick();
     }
 
     /**
@@ -90,10 +80,8 @@ import java.util.ArrayList;
      */
     @Override
     public int getItemCount() {
-        return items.size(); //number of MenuItem in the array list.
+        return items.size();
     }
-
-
 
     /**
      * Get the views from the row layout file, similar to the onCreate() method.
@@ -102,11 +90,13 @@ import java.util.ArrayList;
         private TextView tv_name, tv_price, tv_quantity;
         private ImageView im_item;
         private Button btn_add, btn_remove;
-        private ConstraintLayout parentLayout; //this is the row layout
+        private ConstraintLayout parentLayout;
 
-        int itemQuantity = ZERO;
-
-        public ItemsHolder(@NonNull View itemView) {
+        /**
+         * A constructor method for the ItemsHolder that takes views to hold.
+         * @param itemView
+         */
+        public ItemsHolder( View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_flavor);
             tv_price = itemView.findViewById(R.id.tv_price);
@@ -115,21 +105,7 @@ import java.util.ArrayList;
             btn_add = itemView.findViewById(R.id.btn_add);
             btn_remove = itemView.findViewById(R.id.btn_remove);
             parentLayout = itemView.findViewById(R.id.rowLayout);
-            tv_quantity.setText("0");
-            setAddButtonOnClick(); //register the onClicklistener for the button on each row.
-            setRemoveButtonOnClick();
-
-            /* set onClickListener for the row layout,
-             * clicking on a row will navigate to another Activity
-             */
-            parentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(itemView.getContext(), ItemSelectedActivity.class);
-                    intent.putExtra("ITEM", tv_name.getText());
-                    itemView.getContext().startActivity(intent);
-                }
-            });
+            tv_quantity.setText(String.valueOf(R.string.initial_quantity));
         }
 
         /**
@@ -138,14 +114,16 @@ import java.util.ArrayList;
          *
          */
 
+        /**
+         * A method that listens for the click of the add quantity button
+         * Adds one to the respective item's quantity.
+         */
         private void setAddButtonOnClick() {
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemQuantity++;
-                    tv_quantity.setText(String.valueOf(itemQuantity));
-                    items.get(getAdapterPosition()).setItemQuantity(itemQuantity);
-                    viewDonuts.get(getAdapterPosition()).setQuantity(itemQuantity);
+                    items.get(getAdapterPosition()).addOne();
+                    tv_quantity.setText(String.valueOf(items.get(getAdapterPosition()).getItemQuantity()));
                     if (addListener != null) {
                         addListener.onItemClick(addItem);
                     }
@@ -153,15 +131,17 @@ import java.util.ArrayList;
             });
         }
 
+        /**
+         * A method that listens for the click of the remove quantity button.
+         * Removes one from the respective item's quantity.
+         */
         private void setRemoveButtonOnClick() {
             btn_remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (itemQuantity > ZERO) {
-                        itemQuantity--;
-                        tv_quantity.setText(String.valueOf(itemQuantity));
-                        items.get(getAdapterPosition()).setItemQuantity(itemQuantity);
-                        viewDonuts.get(getAdapterPosition()).setQuantity(itemQuantity);
+                    if (items.get(getAdapterPosition()).getItemQuantity() > ZERO) {
+                        items.get(getAdapterPosition()).removeOne();
+                        tv_quantity.setText(String.valueOf(items.get(getAdapterPosition()).getItemQuantity()));
                         if (removeListener != null) {
                             removeListener.onItemClick(removeItem);
                         }
@@ -171,34 +151,29 @@ import java.util.ArrayList;
         }
     }
 
-    private ArrayList<Donut> createDonuts() {
-        ArrayList<Donut> donuts = new ArrayList<>();
-        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_1()));
-        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_2()));
-        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_3()));
-        donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_4()));
-        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_1()));
-        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_2()));
-        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_3()));
-        donuts.add(new Donut(ZERO, DonutType.CAKE_DONUT.getName(), DonutType.CAKE_DONUT.getFlavor_4()));
-        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_1()));
-        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_2()));
-        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_3()));
-        donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_4()));
-        return donuts;
-    }
-
+    /**
+     *
+     * @param addListener Listens for the click of the add button.
+     */
     public void setOnItemClickListenerAdd(OnItemsClickListener addListener) {
         this.addListener = addListener;
     }
 
-    public void setOnItemsClickListenerRemove(OnItemsClickListener removeListener) {
+    /**
+     *
+     * @param removeListener Listens for the click ofthe remove button.
+     */
+    public void setOnItemClickListenerRemove(OnItemsClickListener removeListener) {
         this.removeListener = removeListener;
     }
 
+    /**
+     * The method that must be implemented by the decree of the OnItemsClickListener Interface.
+     */
     public static class onItemClickListener implements OnItemsClickListener {
         @Override
         public void onItemClick(Item items) {
         }
     }
+
 }

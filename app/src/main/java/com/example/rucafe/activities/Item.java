@@ -7,10 +7,11 @@ import java.io.Serializable;
  * @author Lily Chang
  */
 public class Item implements Serializable {
+	private static final int ONE = 1;
 	private String itemName;
 	private int image;
-	private String unitPrice; //for demo purpose, the unitPrice is of String type
-	private int itemQuantity; //This is new - Taze
+	private String unitPrice;
+	 int itemQuantity;
 
 
 	/**
@@ -24,7 +25,7 @@ public class Item implements Serializable {
 		this.itemName = itemName;
 		this.image = image;
 		this.unitPrice = unitPrice;
-		this.itemQuantity = itemQuantity; //This is new - Taze
+		this.itemQuantity = itemQuantity;
 	}
 
 	/**
@@ -54,12 +55,26 @@ public class Item implements Serializable {
 		return unitPrice;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int getItemQuantity() {
 		return itemQuantity;
 	}
 
-	public void setItemQuantity(int itemQuantity) {
-		this.itemQuantity = itemQuantity;
+	/**
+	 *
+	 */
+	public void addOne() {
+		this.itemQuantity = itemQuantity + ONE;
+	}
+
+	/**
+	 *
+	 */
+	public void removeOne() {
+		this.itemQuantity = itemQuantity - ONE;
 	}
 }
 

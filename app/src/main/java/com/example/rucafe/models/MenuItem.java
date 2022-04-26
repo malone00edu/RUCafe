@@ -36,8 +36,16 @@ public class MenuItem implements Serializable {
     public  void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    /**
+     * Gets the quantity of the menu item.
+     * @return
+     */
     public int getQuantity() { return this.quantity; }
 
+    /**
+     * The item price of the menu item.
+     */
     public void itemPrice() {}
 
 }

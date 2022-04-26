@@ -36,11 +36,6 @@
         </activity>
 
         <activity
-            android:name="com.example.rucafe.activities.ItemSelectedActivity"
-            android:label="Item Selected Activity"
-            android:parentActivityName="com.example.rucafe.MainActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.rucafe.MainActivity"
             android:exported="true">
             <intent-filter>

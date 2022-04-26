@@ -23,33 +23,23 @@ import com.example.rucafe.models.*;
  */
 public class DonutActivity extends AppCompatActivity implements OnItemsClickListener{
 
-
     private static final int ZERO = 0;
-    //Declare an instance of ArrayList to hold the items to be display with the RecyclerView
+    private static final int TYPE_1 = 0, TYPE_2 = 1, TYPE_3 = 2, TYPE_4 = 3, TYPE_5 = 4, TYPE_6 = 5,
+            TYPE_7 = 6, TYPE_8 = 7, TYPE_9 = 8, TYPE_10 = 9, TYPE_11 = 10, TYPE_12 = 11;
+    private static final int FIRST_THREE_DONUT_TYPES = 3;
+    private static final int FIRST_SEVEN_DONUT_TYPES = 7;
     private ArrayList<Item> items = new ArrayList<>();
     ArrayList<Item> donutItems;
     ArrayList<Donut> donuts;
 
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("##0.00");
-    private String donutsPriceString = "";
-
-    /* All the images associated with the menu items are stored in the res/drawable folder
-     *  Each image are accessed with the resource ID, which is an integer.
-     *  We need an array of integers to hold the resource IDs. Make sure the index of a given
-     *  ID is consistent with the index of the associated menu item in the ArrayList.
-     *  An image resource could also be an URI.
-     */
 
     private int [] itemImages = {R.drawable.yeast_donut, R.drawable.yeast_donut, R.drawable.yeast_donut,
             R.drawable.yeast_donut, R.drawable.cake_donut, R.drawable.cake_donut, R.drawable.cake_donut,
             R.drawable.cake_donut, R.drawable.donut_hole, R.drawable.donut_hole, R.drawable.donut_hole,
             R.drawable.donut_hole};
 
-    private String unitPrice = "";
-    private int itemQuantity = ZERO;
-    
     private TextView subtotal;
-    private Button  addToOrder;
 
     /**
      * Get the references of all instances of Views defined in the layout file, set up the list of
@@ -61,46 +51,61 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donut);
         donuts = (ArrayList<Donut>) getIntent().getSerializableExtra("Donuts");
-        addToOrder = (Button) findViewById(R.id.btn_addToOrder);
+        Button addToOrder = (Button) findViewById(R.id.btn_addToOrder);
         subtotal = (TextView) findViewById(R.id.tv_subtotal);
-        subtotal.setText("0.00");
+        subtotal.setText(getString(R.string.sub_total) + getString(R.string.default_price));
 
         RecyclerView rcview = findViewById(R.id.rcView_menu);
-        donutItems = setupMenuItems(); //add the list of items to the ArrayList
-        ItemsAdapter adapter = new ItemsAdapter(this, items); //create the adapter
-        rcview.setAdapter(adapter); //bind the list of items to the RecyclerView
-        //use the LinearLayout for the RecyclerView
+        donutItems = setupMenuItems();
+        ItemsAdapter adapter = new ItemsAdapter(this, items);
+        rcview.setAdapter(adapter);
         rcview.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setOnItemClickListenerAdd(new ItemsAdapter.onItemClickListener(){
+            /**
+             * Listens for the click of an Item object's add button.
+             * Adds subtotal of all donuts and displays the amount.
+             * @param items The object to be clicked on.
+             */
             @Override
             public void onItemClick(Item items){
-                //Set your TextView here when card is Clicked on
                 for(Item selectedDonutItem : donutItems) {
                     tallySelectedDonuts(selectedDonutItem, donuts);
                 }
-                subtotal.setText(calculateAndDisplayPrice());
+                subtotal.setText(getString(R.string.sub_total) + calculateAndDisplayPrice());
             }
         });
 
         adapter.setOnItemClickListenerRemove(new ItemsAdapter.onItemClickListener(){
+            /**
+             * Listens for the click of an Item object's remove button.
+             * Adds subtotal of all donuts and displays the amount.
+             * @param items The object to be clicked on.
+             */
             @Override
             public void onItemClick(Item items){
-                //Set your TextView here when card is Clicked on
                 for(Item selectedDonutItem : donutItems) {
                     tallySelectedDonuts(selectedDonutItem, donuts);
                 }
-                subtotal.setText(calculateAndDisplayPrice());
+                subtotal.setText(getString(R.string.sub_total) + calculateAndDisplayPrice());
             }
         });
 
         addToOrder.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listens for the click of a add to order button.
+             * @param view The view to be clicked on.
+             */
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
                 alert.setTitle("Add to order");
-                //handle the "YES" click
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    /**
+                     * Add donut(s) to your order if respective button was clicked.
+                     * @param dialog The dialog that received the click.
+                     * @param which The button that was clicked.
+                     */
                     public void onClick(DialogInterface dialog, int which) {
                         for (Item selectedDonutItem : donutItems) {
                             tallySelectedDonuts(selectedDonutItem, donuts);
@@ -120,8 +125,12 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
                                     " No donut(s) to add to your order.", Toast.LENGTH_LONG).show();
                         }
                     }
-                    //handle the "NO" click
                 }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    /**
+                     * Backs out of adding donut(s) to your order if respective button was clicked.
+                     * @param dialog The dialog that received the click.
+                     * @param which The button that was clicked.
+                     */
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(DonutActivity.this,
                                 " Donut(s) was not added to your order.", Toast.LENGTH_LONG).show();
@@ -134,36 +143,36 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
     }
 
     /**
-     * Helper method that updates the Donut object from Item object's selected quantity.
-     * @param selectedDonutItem The quantity selected from a donut Item.
-     * @param donuts The chosen Donut object whose quantity will be updated.
+     * Helper method that updates the Donut object by viewing an Item object's quantity.
+     * @param selectedDonutItem The quantity selected from a particular donut object Item.
+     * @param donuts The Donut objects whose quantity will be updated.
      */
     private void tallySelectedDonuts(Item selectedDonutItem, ArrayList<Donut> donuts) {
         switch (selectedDonutItem.getItemName()) {
             case "Yeast Donut: Maple":
-                donuts.get(0).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_1).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Yeast Donut: Glazed":
-                donuts.get(1).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_2).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Yeast Donut: Vanilla Glazed":
-                donuts.get(2).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_3).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Yeast Donut: Chocolate Glazed":
-                donuts.get(3).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_4).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Cake Donut: Maple":
-                donuts.get(4).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_5).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Cake Donut: Vanilla":
-                donuts.get(5).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_6).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Cake Donut: Boston Creme":
-                donuts.get(6).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_7).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Cake Donut: Chocolate Glazed":
-                donuts.get(7).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_8).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Donut Hole: Custard":
-                donuts.get(8).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_9).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Donut Hole: Lemon Cream":
-                donuts.get(9).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_10).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Donut Hole: Raspberry Jelly":
-                donuts.get(10).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_11).setQuantity(selectedDonutItem.getItemQuantity());break;
             case "Donut Hole: Strawberry Jelly":
-                donuts.get(11).setQuantity(selectedDonutItem.getItemQuantity());break;
+                donuts.get(TYPE_12).setQuantity(selectedDonutItem.getItemQuantity());break;
             default:
         }
     }
@@ -172,22 +181,13 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
      * Helper method to set up the data (the Model of the MVC).
      */
     private ArrayList<Item> setupMenuItems() {
-        /*
-         * Item names are defined in a String array under res/string.xml.
-         * Your item names might come from other places, such as an external file, or the database
-         * from the backend.
-         */
         String[] itemNames = getResources().getStringArray(R.array.itemNames);
-        /* Add the items to the ArrayList.
-         * Note that I use hardcoded prices for demo purpose. This should be replaced by other
-         * data sources.
-         */
-
         for (int i = 0; i < itemNames.length; i++) {
-            if (i <= 3) unitPrice = String.valueOf(DonutType.YEAST_DONUT.getPrice());
-            else if (i <= 7) unitPrice = String.valueOf(DonutType.CAKE_DONUT.getPrice());
+            String unitPrice;
+            if (i <= FIRST_THREE_DONUT_TYPES) unitPrice = String.valueOf(DonutType.YEAST_DONUT.getPrice());
+            else if (i <= FIRST_SEVEN_DONUT_TYPES) unitPrice = String.valueOf(DonutType.CAKE_DONUT.getPrice());
             else unitPrice = String.valueOf(DonutType.DONUT_HOLE.getPrice());
-            items.add(new Item(itemNames[i], itemImages[i], unitPrice, itemQuantity));
+            items.add(new Item(itemNames[i], itemImages[i], unitPrice, ZERO));
         }
         return items;
     }
@@ -197,13 +197,12 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
      * @return
      */
     private String calculateAndDisplayPrice() {
-        double totalPrice = 0;
+        double totalPrice = ZERO;
         for (Donut donut : donuts) {
             donut.itemPrice();
             totalPrice += donut.getPrice();
         }
-        donutsPriceString = DECIMAL_FORMAT.format(totalPrice);
-        return donutsPriceString;
+        return DECIMAL_FORMAT.format(totalPrice);
     }
 
     /**

@@ -32,6 +32,20 @@
         <item>9</item>
         <item>10</item>
     </string-array>
+    <string-array name="donutQtyNum">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
     <string name="main_menu_title">Main Menu</string>
     <string name="orders_page_title">Your Order</string>
     <string name="ordering_coffee_title">Order Coffee</string>
@@ -49,6 +63,7 @@
     <string name="addins">Addins</string>
     <string name="price">Price:</string>
     <string name="quantity">Quantity:</string>
+    <string name="initial_quantity">0</string>
     <string name="default_price">$0.00</string>
     <string name="size">Size:</string>
     <string name="add_to_order">Add to Order</string>
@@ -59,7 +74,7 @@
     <string name="add">Add</string>
     <string name="remove">Remove</string>
     <string name="current_price">Current Price:</string>
-    <string name="sub_total">Subtotal:</string>
+    <string name="sub_total">Subtotal: </string>
     <string name="sales_tax">Sales Tax:</string>
     <string name="total">Total:</string>
     <string name="remove_selected_item">Remove Item</string>
@@ -71,4 +86,6 @@
     <string name="donut_type">Donut type:</string>
     <string name="order_successfully_placed">Successfully added to store orders.</string>
     <string name="successfully_removed_order">Successfully removed from store orders.</string>
+    <string name="plus_sign">+</string>
+    <string name="minus_sign">-</string>
 </resources>

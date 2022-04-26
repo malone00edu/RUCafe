@@ -79,7 +79,7 @@ public class OrderActivity extends AppCompatActivity {
             Toast.makeText(OrderActivity.this, "Order placed.", Toast.LENGTH_LONG).show();
         });
 
-        // Update UI and recompute price
+        // Update UI and calculate price
         this.updateUI();
         this.calculateAndDisplayPrice();
     }
@@ -89,7 +89,7 @@ public class OrderActivity extends AppCompatActivity {
      */
     private void removeItemFromOrder() {
         currentOrder.remove(this.currentItem);
-        // Update UI and recompute price
+        // Update UI and calculate price
         this.updateUI();
         this.calculateAndDisplayPrice();
     }

@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".MainActivity">
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MainActivity"
-    >
+            android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcView_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"/>
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcView_menu"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_gravity="top"
-                android:background="@android:color/white"
-                android:textSize="20sp"
-                android:gravity="center|left"
-                android:id="@+id/tv_subtotal"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="12dp" android:layout_marginStart="328dp"/>
+                android:layout_height="match_parent"
+        />
 
-        <ImageView
-                android:layout_width="25dp"
-                android:layout_height="36dp" app:srcCompat="@drawable/dollar"
-                android:id="@+id/subtotalImage"
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="top"
-                android:background="@android:color/white"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="12dp" android:layout_marginStart="302dp"/>
-        <Button
-                android:text="Add to Order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:gravity="center"
-                android:id="@+id/btn_addToOrder"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="7dp"/>
+                android:gravity="center">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.Toolbar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black"
+                        android:theme="?attr/actionBarTheme"
+                        android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar1"
+                        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/add_to_order"
+                        android:layout_width="180dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="top"
+                        android:gravity="center"
+                        android:id="@+id/btn_addToOrder"
+                        app:layout_constraintStart_toStartOf="@+id/toolbar1"
+                        app:layout_constraintBottom_toBottomOf="@+id/toolbar1" android:layout_marginBottom="5dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:background="@android:color/black"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:gravity="center|left"
+                        android:id="@+id/tv_subtotal"
+                        app:layout_constraintBottom_toBottomOf="@+id/toolbar1"
+                        android:layout_marginBottom="17dp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline1"/>
+                <androidx.constraintlayout.widget.Guideline
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:layout_constraintGuide_begin="202dp"
+                        android:id="@+id/guideline1"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <requestFocus></requestFocus>
+        </LinearLayout>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

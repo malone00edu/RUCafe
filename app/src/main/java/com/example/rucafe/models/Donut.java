@@ -24,22 +24,6 @@ public class Donut extends MenuItem implements Serializable {
     }
 
     /**
-     * Sets the type of donut.
-     * @param donutType Donut type.
-     */
-    public void setDonutType(String donutType) {
-        this.donutType = donutType;
-    }
-
-    /**
-     * Sets donut flavor.
-     * @param donutFlavor Donut flavor.
-     */
-    public void setDonutFlavor(String donutFlavor) {
-        this.donutFlavor = donutFlavor;
-    }
-
-    /**
      * Calculates the price of current donut order.
      */
     @Override
