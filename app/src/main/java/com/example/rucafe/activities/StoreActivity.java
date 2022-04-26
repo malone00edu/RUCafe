@@ -94,11 +94,11 @@ public class StoreActivity extends AppCompatActivity {
      * Removes an order from the store orders list.
      */
     private void removeOrderFromStore() {
-        if (storeOrders.isEmpty()) {
+        if (currentStoreOrder.isOrderBookEmpty()) {
             Toast.makeText(StoreActivity.this, "Error: Cannot remove order.", Toast.LENGTH_LONG).show();
         }
         else {
-            storeOrders.remove(this.currentOrder);
+            currentStoreOrder.remove(this.currentOrder);
             Toast.makeText(StoreActivity.this, "Removed order successfully.", Toast.LENGTH_LONG).show();
         }
 

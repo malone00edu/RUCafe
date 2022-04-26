@@ -32,6 +32,9 @@
         <item>9</item>
         <item>10</item>
     </string-array>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="dollar">$</string>
     <string name="main_menu_title">Main Menu</string>
     <string name="orders_page_title">Your Order</string>
     <string name="ordering_coffee_title">Order Coffee</string>
@@ -45,7 +48,7 @@
     <string name="syrup">Syrup</string>
     <string name="milk">Milk</string>
     <string name="caramel">Caramel</string>
-    <string name="whipped_cream">Whipped Cream</string>
+    <string name="whipped_cream">W. Cream</string>
     <string name="addins">Addins</string>
     <string name="price">Price:</string>
     <string name="quantity">Quantity:</string>
