@@ -15,10 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.rucafe.R;
 import com.example.rucafe.models.Order;
 import com.example.rucafe.models.StoreOrders;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * The Activity class that creates the store orders GUI display.
+ * @author Taze Balbosa, Yulie Ying
+ */
 public class StoreActivity extends AppCompatActivity {
     private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("$###,##0.00");
 
@@ -76,17 +79,15 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
 
-        // Remove order from store orders listener
         btn_removeOrder.setOnClickListener(v -> {
             this.removeOrderFromStore();
         });
-
         btn_showOrder.setOnClickListener(v -> {
             this.showOrder();
             this.calculateAndDisplayPrice();
         });
 
-        // Update UI and recompute price
+
         this.updateUI();
     }
 
@@ -118,12 +119,10 @@ public class StoreActivity extends AppCompatActivity {
      * Update UI, clear selections and repopulate order listview. Also check if placeOrder should be disabled
      */
     private void updateUI() {
-        // Update UI
+
         lv_storeOrderListView.clearChoices();
         lv_storeOrderListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentStoreOrder.getOrderBook()));
         this.btn_showOrder.setEnabled(false);
-
-        // Check if remove order button should be disabled
         btn_removeOrder.setEnabled(!this.currentStoreOrder.isOrderBookEmpty());
     }
 
@@ -131,19 +130,11 @@ public class StoreActivity extends AppCompatActivity {
      * Recompute all the prices and update text boxes
      */
     private void calculateAndDisplayPrice() {
-        // reset subtotal and recalc
         subtotal = currentOrder.getSubTotal();
-        // Update subtotal formatted as currency
         tv_subtotal.setText(DECIMAL_FORMAT.format(subtotal));
-
-        // reset sales tax and recalc
         salesTax = currentOrder.calcSalesTax();
-        // Update sales tax formatted as currency
         tv_salesTax.setText(DECIMAL_FORMAT.format(salesTax));
-
-        // reset total price and recalc
         total = subtotal + salesTax;
-        // Update total formatted as currency
         tv_totalPrice.setText(DECIMAL_FORMAT.format(total));
     }
 }

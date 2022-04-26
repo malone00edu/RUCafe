@@ -9,9 +9,12 @@ import com.example.rucafe.MainActivity;
 import com.example.rucafe.R;
 import com.example.rucafe.models.MenuItem;
 import com.example.rucafe.models.Order;
-
 import java.text.DecimalFormat;
 
+/**
+ * The Activity class that creates the ordering GUI display.
+ * @author Taze Balbosa, Yulie Ying
+ */
 public class OrderActivity extends AppCompatActivity {
     private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("$###,##0.00");
 
@@ -39,7 +42,6 @@ public class OrderActivity extends AppCompatActivity {
         lv_orderListView = (ListView) findViewById(R.id.lv_listOrder);
         btn_placeOrder = (Button) findViewById(R.id.btn_showOrder);
         btn_removeItem = (Button) findViewById(R.id.btn_removeStoreOrder);
-
         lv_orderListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         lv_orderListView.setSelector(R.color.design_default_color_primary);
     }
@@ -51,7 +53,6 @@ public class OrderActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // Order list view on item click listener
         lv_orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
              * Processes action when clicking a specific item in order.
@@ -67,19 +68,16 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-        // Remove item from order listener
         btn_removeItem.setOnClickListener(v -> {
             this.removeItemFromOrder();
             Toast.makeText(OrderActivity.this, "Item removed.", Toast.LENGTH_LONG).show();
         });
 
-        // Place order listener
         btn_placeOrder.setOnClickListener(v -> {
             this.placeOrder();
             Toast.makeText(OrderActivity.this, "Order placed.", Toast.LENGTH_LONG).show();
         });
 
-        // Update UI and calculate price
         this.updateUI();
         this.calculateAndDisplayPrice();
     }
@@ -98,12 +96,10 @@ public class OrderActivity extends AppCompatActivity {
      * Update UI, clear selections and repopulate order listview. Also check if placeOrder should be disabled
      */
     private void updateUI() {
-        // Update UI
+
         lv_orderListView.clearChoices();
         lv_orderListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentOrder.getOrderList()));
         this.btn_removeItem.setEnabled(false);
-
-        // Check if place order button should be disabled
         btn_placeOrder.setEnabled(!this.currentOrder.isMenuEmpty());
     }
 
@@ -111,19 +107,12 @@ public class OrderActivity extends AppCompatActivity {
      * Recompute all the prices and update text boxes
      */
     private void calculateAndDisplayPrice() {
-        // reset subtotal and recalc
+
         subtotal = currentOrder.getSubTotal();
-        // Update subtotal formatted as currency
         tv_subtotal.setText(DECIMAL_FORMAT.format(subtotal));
-
-        // reset sales tax and recalc
         salesTax = currentOrder.calcSalesTax();
-        // Update sales tax formatted as currency
         tv_salesTax.setText(DECIMAL_FORMAT.format(salesTax));
-
-        // reset total price and recalc
         total = subtotal + salesTax;
-        // Update total formatted as currency
         tv_totalPrice.setText(DECIMAL_FORMAT.format(total));
     }
 
@@ -131,13 +120,8 @@ public class OrderActivity extends AppCompatActivity {
      * Place the order, updating StoreOrders.
      */
     private void placeOrder() {
-        // finalize the store order, which adds it to StoreOrders
         currentOrder.submitOrder();
-
-        // Show toast
         Toast.makeText(getBaseContext(), R.string.order_successfully_placed, Toast.LENGTH_SHORT).show();
-
-        // Navigate back
         Intent gotoMainActivity = new Intent(this, MainActivity.class);
         startActivity(gotoMainActivity);
     }

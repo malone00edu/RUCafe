@@ -5,13 +5,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.rucafe.activities.*;
-import com.example.rucafe.models.Customizable;
 import com.example.rucafe.models.Donut;
 import com.example.rucafe.models.DonutType;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -114,7 +110,5 @@ public class MainActivity extends AppCompatActivity {
         Intent gotoStoreOrders = new Intent(this, StoreActivity.class);
         startActivity(gotoStoreOrders);
     }
-
-    //private Donut setupDonutObjects(Donut donuts) {
-    //}
+    
 }
