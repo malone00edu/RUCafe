@@ -64,6 +64,7 @@
     <string name="total">Total:</string>
     <string name="remove_selected_item">Remove Item</string>
     <string name="place_order">Place Order</string>
+    <string name="show_order">Show Order</string>
     <string name="save_export_order">Export Order</string>
     <string name="remove_selected_order">Remove Order</string>
     <string name="donut_flavor">Donut flavor:</string>

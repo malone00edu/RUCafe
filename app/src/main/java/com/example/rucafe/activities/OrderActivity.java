@@ -12,9 +12,6 @@ import com.example.rucafe.models.Order;
 
 import java.text.DecimalFormat;
 
-/**
- *
- */
 public class OrderActivity extends AppCompatActivity {
     private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("$###,##0.00");
 
@@ -26,8 +23,9 @@ public class OrderActivity extends AppCompatActivity {
     double total, subtotal, salesTax;
 
     /**
-     *
-     * @param savedInstanceState
+     * Creates and starts the order menu UI.
+     * @param savedInstanceState The reference to a Bundle object that is
+     * passed into the onCreate method of every Android Activity
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +37,15 @@ public class OrderActivity extends AppCompatActivity {
         tv_subtotal = (TextView) findViewById(R.id.tv_subtotalOrder);
         tv_salesTax = (TextView) findViewById(R.id.tv_salesTaxOrder);
         lv_orderListView = (ListView) findViewById(R.id.lv_listOrder);
-        btn_placeOrder = (Button) findViewById(R.id.btn_placeOrder);
-        btn_removeItem = (Button) findViewById(R.id.btn_removeItemOrder);
+        btn_placeOrder = (Button) findViewById(R.id.btn_showOrder);
+        btn_removeItem = (Button) findViewById(R.id.btn_removeStoreOrder);
 
         lv_orderListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         lv_orderListView.setSelector(R.color.design_default_color_primary);
     }
 
     /**
-     *
+     * Starts the ListViews and contains methods for button actions.
      */
     @Override
     protected void onStart() {
@@ -55,6 +53,13 @@ public class OrderActivity extends AppCompatActivity {
 
         // Order list view on item click listener
         lv_orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Processes action when clicking a specific item in order.
+             * @param parent The AdapterView where the selection happened.
+             * @param view The view within the AdapterView that was clicked.
+             * @param position The position of the view in the adapter.
+             * @param id The row id of the item that is selected.
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 currentItem = (MenuItem) lv_orderListView.getItemAtPosition(position);
@@ -65,32 +70,34 @@ public class OrderActivity extends AppCompatActivity {
         // Remove item from order listener
         btn_removeItem.setOnClickListener(v -> {
             this.removeItemFromOrder();
+            Toast.makeText(OrderActivity.this, "Item removed.", Toast.LENGTH_LONG).show();
         });
 
         // Place order listener
         btn_placeOrder.setOnClickListener(v -> {
             this.placeOrder();
+            Toast.makeText(OrderActivity.this, "Order placed.", Toast.LENGTH_LONG).show();
         });
 
         // Update UI and recompute price
-        this.refreshUI();
+        this.updateUI();
         this.calculateAndDisplayPrice();
     }
 
     /**
-     *
+     * Remove selected item from order
      */
     private void removeItemFromOrder() {
         currentOrder.remove(this.currentItem);
         // Update UI and recompute price
-        this.refreshUI();
+        this.updateUI();
         this.calculateAndDisplayPrice();
     }
 
     /**
-     *
+     * Update UI, clear selections and repopulate order listview. Also check if placeOrder should be disabled
      */
-    private void refreshUI() {
+    private void updateUI() {
         // Update UI
         lv_orderListView.clearChoices();
         lv_orderListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentOrder.getOrderList()));
@@ -101,7 +108,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Recompute all the prices and update text boxes
      */
     private void calculateAndDisplayPrice() {
         // reset subtotal and recalc
@@ -121,7 +128,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Place the order, updating StoreOrders.
      */
     private void placeOrder() {
         // finalize the store order, which adds it to StoreOrders

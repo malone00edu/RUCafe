@@ -22,6 +22,10 @@ import com.example.rucafe.models.*;
 
 import java.text.DecimalFormat;
 
+/**
+ * The coffee activity class that creates the coffee ordering UI.
+ * @author Taze Balbosa, Yulie Ying
+ */
 public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener, View.OnClickListener{
 
@@ -46,6 +50,11 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Button addCreamBtn, rmvCreamBtn, addMilkBtn, rmvMilkBtn, addWhippedBtn, rmvWhippedBtn,
             addCaramelBtn, rmvCaramelBtn, addSyrupBtn, rmvSyrupBtn, addToOrderBtn;
 
+    /**
+     * Creates and starts the coffee ordering UI.
+     * @param savedInstanceState The reference to a Bundle object that is
+     * passed into the onCreate method of every Android Activity
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee);
@@ -131,6 +140,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         addToOrderBtn.setOnClickListener(this);
     }
 
+    /**
+     * Listener method for coffee size and quantity spinners selections.
+     * @param adapterView The AdapterView where the selection happened.
+     * @param view The view within the AdapterView that was clicked.
+     * @param i The position of the view in the adapter.
+     * @param l The row id of the item that is selected.
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
@@ -149,11 +165,20 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         coffeeSubTotal.setText(calculateAndDisplayPrice());
     }
 
+    /**
+     * Listener method for coffee size and quantity spinners when nothing is selected.
+     * @param adapterView The AdapterView that now contains no selected item.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+    /**
+     * Listener method for coffee UI check boxes.
+     * @param buttonView The compound button view whose state has changed.
+     * @param isChecked The new checked state of buttonView.
+     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch(buttonView.getId()) {
@@ -232,6 +257,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
+    /**
+     * Listener method for coffee UI buttons.
+     * @param view The view that was clicked.
+     */
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
@@ -321,6 +350,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
+    /**
+     * Calculates and displays coffee item price.
+     * @return String of coffee item and price.
+     */
     private String calculateAndDisplayPrice() {
         coffee.itemPrice();
 
@@ -328,6 +361,9 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         return coffeePrice;
     }
 
+    /**
+     * Returns to the main ordering menu.
+     */
     private void returnToMainActivity() {
         Intent goToMainActivity = new Intent(this, MainActivity.class);
         startActivity(goToMainActivity);
