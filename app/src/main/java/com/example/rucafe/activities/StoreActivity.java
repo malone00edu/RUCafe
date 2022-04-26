@@ -1,6 +1,5 @@
 package com.example.rucafe.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -13,9 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.rucafe.MainActivity;
 import com.example.rucafe.R;
-import com.example.rucafe.models.MenuItem;
 import com.example.rucafe.models.Order;
 import com.example.rucafe.models.StoreOrders;
 
@@ -33,6 +30,11 @@ public class StoreActivity extends AppCompatActivity {
     protected ArrayList<Order> storeOrders = new ArrayList<>();
     double total, subtotal, salesTax;
 
+    /**
+     * Creates and starts the store order menu UI.
+     * @param savedInstanceState The reference to a Bundle object that is
+     * passed into the onCreate method of every Android Activity
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
@@ -51,11 +53,21 @@ public class StoreActivity extends AppCompatActivity {
         lv_storeOrderListView.setSelector(R.color.design_default_color_primary);
     }
 
+    /**
+     * Starts the ListViews and contains methods for button actions.
+     */
     @Override
     protected void onStart() {
         super.onStart();
 
         lv_storeOrderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Processes action when clicking a specific order in store orders list.
+             * @param parent The AdapterView where the selection happened.
+             * @param view The view within the AdapterView that was clicked.
+             * @param position The position of the view in the adapter.
+             * @param id The row id of the item that is selected.
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 currentOrder = (Order) lv_storeOrderListView.getItemAtPosition(position);
@@ -78,6 +90,9 @@ public class StoreActivity extends AppCompatActivity {
         this.updateUI();
     }
 
+    /**
+     * Removes an order from the store orders list.
+     */
     private void removeOrderFromStore() {
         if (storeOrders.isEmpty()) {
             Toast.makeText(StoreActivity.this, "Error: Cannot remove order.", Toast.LENGTH_LONG).show();
@@ -90,6 +105,9 @@ public class StoreActivity extends AppCompatActivity {
         this.updateUI();
     }
 
+    /**
+     * Shows a detailed list of a order in the store orders.
+     */
     private void showOrder() {
         lv_storeOrderListView.clearChoices();
         lv_storeOrderListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentOrder.getOrderList()));

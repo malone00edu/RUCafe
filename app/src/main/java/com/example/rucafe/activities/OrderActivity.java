@@ -22,6 +22,11 @@ public class OrderActivity extends AppCompatActivity {
     private MenuItem currentItem;
     double total, subtotal, salesTax;
 
+    /**
+     * Creates and starts the order menu UI.
+     * @param savedInstanceState The reference to a Bundle object that is
+     * passed into the onCreate method of every Android Activity
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
@@ -39,12 +44,22 @@ public class OrderActivity extends AppCompatActivity {
         lv_orderListView.setSelector(R.color.design_default_color_primary);
     }
 
+    /**
+     * Starts the ListViews and contains methods for button actions.
+     */
     @Override
     protected void onStart() {
         super.onStart();
 
         // Order list view on item click listener
         lv_orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Processes action when clicking a specific item in order.
+             * @param parent The AdapterView where the selection happened.
+             * @param view The view within the AdapterView that was clicked.
+             * @param position The position of the view in the adapter.
+             * @param id The row id of the item that is selected.
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 currentItem = (MenuItem) lv_orderListView.getItemAtPosition(position);
