@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * This class defines the data structure of an item to be displayed in the RecyclerView
- * @author Lily Chang
+ * @author Taze Balbosa, Yulie Ying
  */
 public class Item implements Serializable {
 	private static final int ONE = 1;
@@ -15,8 +15,7 @@ public class Item implements Serializable {
 
 
 	/**
-	 * Parameterized constructor.
-	 *
+	 * Parameterized constructor for an Item object.
 	 * @param itemName
 	 * @param image
 	 * @param unitPrice
@@ -30,7 +29,6 @@ public class Item implements Serializable {
 
 	/**
 	 * Getter method that returns the item name of an item.
-	 *
 	 * @return the item name of an item.
 	 */
 	public String getItemName() {
@@ -39,7 +37,6 @@ public class Item implements Serializable {
 
 	/**
 	 * Getter method that returns the image of an item.
-	 *
 	 * @return the image of an item.
 	 */
 	public int getImage() {
@@ -48,7 +45,6 @@ public class Item implements Serializable {
 
 	/**
 	 * Getter method that returns the unit price.
-	 *
 	 * @return the unit price of the item.
 	 */
 	public String getUnitPrice() {
@@ -56,7 +52,7 @@ public class Item implements Serializable {
 	}
 
 	/**
-	 *
+	 * Getter method that returns the item's quantity.
 	 * @return
 	 */
 	public int getItemQuantity() {
@@ -64,14 +60,14 @@ public class Item implements Serializable {
 	}
 
 	/**
-	 *
+	 * A method that adds one to item's quantity.
 	 */
 	public void addOne() {
 		this.itemQuantity = itemQuantity + ONE;
 	}
 
 	/**
-	 *
+	 * A method that removes one from an items's quantity.
 	 */
 	public void removeOne() {
 		this.itemQuantity = itemQuantity - ONE;

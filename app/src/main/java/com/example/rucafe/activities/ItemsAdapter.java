@@ -1,12 +1,10 @@
 package com.example.rucafe.activities;
 
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,7 +61,6 @@ import java.util.ArrayList;
      */
     @Override
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
-        //assign values for each row
         holder.tv_name.setText(items.get(position).getItemName());
         holder.tv_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
@@ -107,12 +104,6 @@ import java.util.ArrayList;
             parentLayout = itemView.findViewById(R.id.rowLayout);
             tv_quantity.setText(String.valueOf(R.string.initial_quantity));
         }
-
-        /**
-         * Set the onClickListener for the button on each row.
-         * Clicking on the button will create an AlertDialog with the options of YES/NO.
-         *
-         */
 
         /**
          * A method that listens for the click of the add quantity button

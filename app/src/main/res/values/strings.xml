@@ -86,6 +86,7 @@
     <string name="donut_type">Donut type:</string>
     <string name="order_successfully_placed">Successfully added to store orders.</string>
     <string name="successfully_removed_order">Successfully removed from store orders.</string>
-    <string name="plus_sign">+</string>
-    <string name="minus_sign">-</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="dollar">$</string>
 </resources>
