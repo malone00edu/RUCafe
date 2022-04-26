@@ -1,6 +1,394 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coffeeMenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="30sp"
+        android:paddingTop="20sp"
+        android:paddingEnd="30sp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="145dp"
+            app:srcCompat="@drawable/coffee_cup" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="129dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+
+                <TextView
+                    android:id="@+id/coffeeSizePrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10sp"
+                    android:text="Size"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/coffeeSizeSpinner"
+                    android:layout_width="180dp"
+                    android:layout_height="58dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/coffeeQuantityPrompt"
+                    android:layout_width="169dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10sp"
+                    android:text="Quantity"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/coffeeQtySpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="59dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false">
+
+                <CheckBox
+                    android:id="@+id/creamCheckBox"
+                    android:layout_width="148dp"
+                    android:layout_height="match_parent"
+                    android:minHeight="0dp"
+                    android:paddingStart="10sp"
+                    android:text="Cream"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/addCreamBtn"
+                    android:layout_width="48dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/creamAmtNum"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5sp"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/rmvCreamBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="-"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/milkCheckBox"
+                    android:layout_width="147dp"
+                    android:layout_height="match_parent"
+                    android:maxHeight="60dp"
+                    android:minHeight="0dp"
+                    android:paddingStart="10sp"
+                    android:text="Milk"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/addMilkBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="5sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/milkAmtNum"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5sp"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/rmvMilkBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="-"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/whippedCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minHeight="0dp"
+                    android:paddingStart="10sp"
+                    android:text="W. Cream"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/addWhippedBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/whippedAmtNum"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5sp"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/rmvWhippedBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="-"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/caramelCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:includeFontPadding="false"
+                    android:minHeight="0dp"
+                    android:paddingStart="10sp"
+                    android:text="Caramel"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/addCaramelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/caramelAmtNum"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5sp"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/rmvCaramelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="-"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/syrupCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minHeight="0dp"
+                    android:paddingStart="10sp"
+                    android:text="Syrup"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/addSyrupBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/syrupAmtNum"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5sp"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/rmvSyrupBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="3sp"
+                    android:width="50sp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="30dip"
+                    android:text="-"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:layout_weight="1"
+                android:text="Subtotal"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:layout_weight="1"
+                android:width="2dp"
+                android:text="$"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/coffeeSubtotalNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:layout_weight="1"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addCoffeeToOrderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="ADD TO ORDER"
+            android:textSize="28sp" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

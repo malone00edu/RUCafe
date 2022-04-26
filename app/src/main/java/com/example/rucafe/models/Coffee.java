@@ -48,6 +48,46 @@ public class Coffee extends MenuItem implements Customizable{
     }
 
     /**
+     * Sets amount of cream for the current coffee order.
+     * @param amount Amount of cream in coffee order.
+     */
+    public void setCream(int amount) {
+        cream = amount;
+    }
+
+    /**
+     * Sets amount of milk for the current coffee order.
+     * @param amount Amount of milk in coffee order.
+     */
+    public void setMilk(int amount) {
+        milk = amount;
+    }
+
+    /**
+     * Sets amount of whipped cream for the current coffee order.
+     * @param amount Amount of whipped cream in coffee order.
+     */
+    public void setWhippedCream(int amount) {
+        whippedCream = amount;
+    }
+
+    /**
+     * Sets amount of caramel for the current coffee order.
+     * @param amount Amount of caramel in coffee order.
+     */
+    public void setCaramel(int amount) {
+        caramel = amount;
+    }
+
+    /**
+     * Sets amount of syrup for the current coffee order.
+     * @param amount Amount of syrup in coffee order.
+     */
+    public void setSyrup(int amount) {
+        syrup = amount;
+    }
+
+    /**
      * Sets the coffee size for the current coffee order.
      * @param coffeeSize Size of coffee order.
      */

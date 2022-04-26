@@ -113,7 +113,7 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
                         }
                         else {
                             Toast.makeText(DonutActivity.this,
-                                    " No donut(s) to added to your order.", Toast.LENGTH_LONG).show();
+                                    " No donut(s) to add to your order.", Toast.LENGTH_LONG).show();
                         }
                     }
                     //handle the "NO" click
