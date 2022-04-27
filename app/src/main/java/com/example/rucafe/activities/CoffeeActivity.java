@@ -317,6 +317,11 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.addCoffeeToOrderBtn:
 
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    /**
+                     * Checks to see if user click on button to coffee to current order.
+                     * @param dialog The selected dialog to be displayed.
+                     * @param which The choice of dialog chosen.
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
