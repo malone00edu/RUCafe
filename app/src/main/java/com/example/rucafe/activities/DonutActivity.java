@@ -15,13 +15,16 @@ import com.example.rucafe.MainActivity;
 import com.example.rucafe.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import com.example.rucafe.models.*;
+import com.example.rucafe.models.Donut;
+import com.example.rucafe.models.DonutType;
+import com.example.rucafe.models.OnItemsClickListener;
+import com.example.rucafe.models.Order;
 
 /**
  * Activity for Donut ordering GUI display.
  * @author Taze Balbosa, Yulie Ying
  */
-public class DonutActivity extends AppCompatActivity implements OnItemsClickListener{
+public class DonutActivity extends AppCompatActivity implements OnItemsClickListener {
 
     private static final int ZERO = 0;
     private static final int TYPE_1 = 0, TYPE_2 = 1, TYPE_3 = 2, TYPE_4 = 3, TYPE_5 = 4, TYPE_6 = 5,

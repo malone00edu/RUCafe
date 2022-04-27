@@ -13,12 +13,12 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.rucafe.MainActivity;
 import com.example.rucafe.R;
-import com.example.rucafe.models.*;
+import com.example.rucafe.models.Coffee;
+import com.example.rucafe.models.CoffeeSize;
+import com.example.rucafe.models.Order;
 
 import java.text.DecimalFormat;
 

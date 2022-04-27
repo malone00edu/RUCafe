@@ -12,7 +12,6 @@ public class Order implements Customizable{
     private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###,##0.00");
     private static final double NJ_TAX = 0.06625;
     private static final int INITIAL_ID = 1;
-    private static final int NOT_FOUND = -1;
     private static final double ZERO = 0;
 
     private double salesTax = ZERO;
@@ -30,14 +29,6 @@ public class Order implements Customizable{
     public Order() {
         this.orderId = INITIAL_ID;
         orderList = new ArrayList<>();
-    }
-
-    /**
-     * Accesses and returns the value of the order number.
-     * @return the value of the order number.
-     */
-    public int getOrderId() {
-        return this.orderId;
     }
 
     /**
@@ -62,23 +53,6 @@ public class Order implements Customizable{
      */
     public double getSubTotal() {
         return this.subTotal;
-    }
-
-    /**
-     * Accesses and returns the ArrayList size of the Order object.
-     * @return The ArrayList size of the Order Object.
-     */
-    public int getListSize() {
-        return orderList.size();
-    }
-
-    /**
-     * Accesses and returns a MenuItem of the ArrayList within the Order object.
-     * @param index The index within the ArrayList
-     * @return The MenuItem within the ArrayList of the Order object.
-     */
-    public String getMenuItem(int index) {
-        return orderList.get(index).toString();
     }
 
     /**
@@ -123,27 +97,6 @@ public class Order implements Customizable{
     }
 
     /**
-     * Calculates the total price of the Order object and returns the value.
-     * @return The value of the total price.
-     */
-    public double calcTotalOrder() {
-        this.total = subTotal + salesTax;
-        return total;
-    }
-
-    /**
-     * Finds and returns the index of the MenuItem within the ArrayList of the Order object.
-     * @param itemId The ID of the MenuItem in question.
-     * @return The index of the MenuItem if found, returns NOT_FOUND if otherwise.
-     */
-    public int seekMenuItem(String itemId) {
-        for (int i = 0; i < orderList.size(); i++) {
-            if (itemId.equals(orderList.get(i).toString())) return i;
-        }
-        return NOT_FOUND;
-    }
-
-    /**
      * Checks to see if the ArrayList within the order object is empty.
      * @return True is the ArrayList object is empty, false if otherwise.
      */
@@ -174,6 +127,11 @@ public class Order implements Customizable{
         StoreOrders.getCurrentOrder().add(this);
         currentOrder = null;
     }
+
+    /**
+     * Creates a string that is formatted with current Order object information.
+     * @return String with Order information.
+     */
     @Override
     public String toString() {
         String orderStringFormat = "";

@@ -1,8 +1,4 @@
 package com.example.rucafe.models;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,20 +26,6 @@ public class StoreOrders implements Customizable {
      * @return List of orders.
      */
     public ArrayList<Order> getOrderBook() {return orderBook;}
-
-    /**
-     * Returns the matching order within the list of orders.
-     * @param orderId the order number in question.
-     * @return  the found order within the list of orders or null if not found.
-     */
-    public Order seekOrder(int orderId) {
-        for (int i = 0; i < orderBook.size(); i++) {
-            if (orderBook.get(i).getOrderId() == orderId) {
-                return orderBook.get(i);
-            }
-        }
-        return null;
-    }
 
     /**
      * Checks to see if any orders were placed.
@@ -88,24 +70,9 @@ public class StoreOrders implements Customizable {
     }
 
     /**
-     * Exports the store orders to selected destination file.
-     * @param selectedFile Destination file for store orders.
-     * @return true if store orders were exported, false if otherwise.
+     * Creates and returns a StoreOrder object.
+     * @return The created StoreOrder object.
      */
-    public boolean exportToDatabase(File selectedFile) {
-        try {
-            FileWriter penAndBook = new FileWriter(selectedFile);
-            String storeOrderString = "";
-            storeOrderString = toString();
-            penAndBook.write(storeOrderString);
-            penAndBook.close();
-        }
-        catch (IOException error) {
-            return false;
-        }
-        return true;
-    }
-
     public static StoreOrders getCurrentOrder() {
         if (currentStoreOrder == null) {
             currentStoreOrder = new StoreOrders();

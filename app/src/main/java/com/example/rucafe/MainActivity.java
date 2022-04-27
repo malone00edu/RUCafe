@@ -5,7 +5,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.example.rucafe.activities.*;
+import com.example.rucafe.activities.CoffeeActivity;
+import com.example.rucafe.activities.DonutActivity;
+import com.example.rucafe.activities.OrderActivity;
+import com.example.rucafe.activities.StoreActivity;
 import com.example.rucafe.models.Donut;
 import com.example.rucafe.models.DonutType;
 import java.util.ArrayList;
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
      * Navigate to the OrderingDonutActivity
      */
     void navigateToOrderingDonut() {
+        //Setting up donut objects and passing them to DonutActivity.class
         ArrayList<Donut> donuts = new ArrayList<>();
         donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_1()));
         donuts.add(new Donut(ZERO, DonutType.YEAST_DONUT.getName(), DonutType.YEAST_DONUT.getFlavor_2()));
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_2()));
         donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_3()));
         donuts.add(new Donut(ZERO, DonutType.DONUT_HOLE.getName(), DonutType.DONUT_HOLE.getFlavor_4()));
+
         Intent gotoOrderDonut = new Intent(this, DonutActivity.class);
         gotoOrderDonut.putExtra("Donuts", donuts);
         startActivity(gotoOrderDonut);
@@ -110,5 +115,5 @@ public class MainActivity extends AppCompatActivity {
         Intent gotoStoreOrders = new Intent(this, StoreActivity.class);
         startActivity(gotoStoreOrders);
     }
-    
+
 }

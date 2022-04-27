@@ -9,14 +9,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.rucafe.R;
 import com.example.rucafe.models.Order;
 import com.example.rucafe.models.StoreOrders;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 /**
  * The Activity class that creates the store orders GUI display.
@@ -30,7 +27,6 @@ public class StoreActivity extends AppCompatActivity {
     private Button btn_removeOrder, btn_showOrder;
     private Order currentOrder;
     private StoreOrders currentStoreOrder;
-    protected ArrayList<Order> storeOrders = new ArrayList<>();
     double total, subtotal, salesTax;
 
     /**
