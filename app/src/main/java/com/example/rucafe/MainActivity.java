@@ -1,8 +1,11 @@
 package com.example.rucafe;
 
 import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.rucafe.activities.CoffeeActivity;
@@ -66,7 +69,31 @@ public class MainActivity extends AppCompatActivity {
                 navigateToStoreOrders();
             }
         });
+
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // Customize the back button
+        //actionBar.setHomeAsUpIndicator(R.drawable.mybutton);
+
+        // showing the back button in action bar
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     /**
      * Navigate to the OrderingCoffeeActivity

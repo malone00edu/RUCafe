@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.rucafe.R;
-import com.example.rucafe.models.MenuItem;
 import com.example.rucafe.models.Order;
 import com.example.rucafe.models.StoreOrders;
 import java.text.DecimalFormat;
@@ -56,7 +56,9 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
 
         lv_storeOrderListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         lv_storeOrderListView.setSelector(R.color.design_default_color_primary);
+
     }
+
 
     /**
      * Starts the ListViews and contains methods for button actions.
@@ -142,4 +144,42 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
         total = subtotal + salesTax;
         tv_totalPrice.setText(DECIMAL_FORMAT.format(total));
     }
+
+    /**
+     * Overrides the behavior of the bottom back button for StoreOrder GUI
+     */
+    @Override
+    public void onBackPressed() {
+        if (checkedOrder == CHECKED) {
+            this.updateUI();
+            checkedOrder = NOT_CHECKED;
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    /**
+     * Overrides teh behavior of the top back button for StoreOrder GUI
+     * @param item The item that is selected.
+     * @return True if home id is found in the AndroidManifest.xml
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.home) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

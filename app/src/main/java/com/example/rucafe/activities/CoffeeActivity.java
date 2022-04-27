@@ -89,7 +89,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         syrupAmtNum = findViewById(R.id.syrupAmtNum);
 
         coffeeSubTotal = findViewById(R.id.coffeeSubtotalNum);
-        coffeeSubTotal.setText("0.00");
+        coffeeSubTotal.setText(R.string.default_price);
 
         ArrayAdapter<CharSequence> coffeeSizeAdapter = ArrayAdapter.createFromResource(this, R.array.coffeeSizeNames, android.R.layout.simple_spinner_item);
         coffeeSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

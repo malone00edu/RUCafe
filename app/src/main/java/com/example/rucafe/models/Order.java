@@ -18,9 +18,9 @@ public class Order implements Customizable{
     private double subTotal = ZERO;
     private double total = ZERO;
 
-    private MenuItem menuItem = new MenuItem(1);
+    private MenuItems menuItems = new MenuItems(1);
     private int orderId;
-    private ArrayList<MenuItem> orderList;
+    private ArrayList<MenuItems> orderList;
     private static Order currentOrder;
 
     /**
@@ -43,7 +43,7 @@ public class Order implements Customizable{
      * Accesses and returns the ArrayList of the Order object.
      * @return The menu list within the order object.
      */
-    public ArrayList<MenuItem> getOrderList() {
+    public ArrayList<MenuItems> getOrderList() {
         return orderList;
     }
 
@@ -56,25 +56,25 @@ public class Order implements Customizable{
     }
 
     /**
-     * Adds a MenuItem object to the ArrayList within the Order object.
-     * @param obj The MenuItem  to be added to an ArrayList object.
-     * @return True if MenuItem object was added, false if otherwise.
+     * Adds a MenuItems object to the ArrayList within the Order object.
+     * @param obj The MenuItems  to be added to an ArrayList object.
+     * @return True if MenuItems object was added, false if otherwise.
      */
     @Override
     public boolean add(Object obj) {
         if (obj != null) {
-            menuItem = (MenuItem) obj;
-            orderList.add(menuItem);
-            this.subTotal += menuItem.price;
+            menuItems = (MenuItems) obj;
+            orderList.add(menuItems);
+            this.subTotal += menuItems.price;
             return true;
         }
         return false;
     }
 
     /**
-     * Removes a MenuItem object from the ArrayList within the Order object.
-     * @param obj The MenuItem to be removed from an ArrayList object.
-     * @return True if MenuItem object was removed, false if otherwise.
+     * Removes a MenuItems object from the ArrayList within the Order object.
+     * @param obj The MenuItems to be removed from an ArrayList object.
+     * @return True if MenuItems object was removed, false if otherwise.
      */
     @Override
     public boolean remove(Object obj) {
