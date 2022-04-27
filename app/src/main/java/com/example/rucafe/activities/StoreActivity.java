@@ -74,11 +74,16 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
             this.showOrder();
             this.calculateAndDisplayPrice();
         });
-
-
         this.updateUI();
     }
 
+    /**
+     * Processes action when clicking a specific order in store orders list.
+     * @param adapterView The AdapterView where the selection happened.
+     * @param view The view within the AdapterView that was clicked.
+     * @param i The position of the view in the adapter.
+     * @param l The row id of the item that is selected.
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (checkedOrder == NOT_CHECKED) {
@@ -102,12 +107,11 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
             currentStoreOrder.remove(this.currentOrder);
             Toast.makeText(StoreActivity.this, "Removed order successfully.", Toast.LENGTH_LONG).show();
         }
-
         this.updateUI();
     }
 
     /**
-     * Shows a detailed list of a order in the store orders.
+     * Shows a detailed list of an order in the store orders.
      */
     private void showOrder() {
         lv_storeOrderListView.clearChoices();
