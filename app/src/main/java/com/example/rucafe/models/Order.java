@@ -135,8 +135,7 @@ public class Order implements Customizable{
     @Override
     public String toString() {
         String orderStringFormat = "";
-        String totalStringFormat = "$" + DECIMAL_FORMAT.format(this.total);
-        orderStringFormat += "Order #" + this.orderId + "::Total: " + totalStringFormat + "\n";
+        orderStringFormat += "Order #" + this.orderId + "\n";
         for (int i = 0; i < orderList.size(); i++) {
             orderStringFormat += orderList.get(i).toString() + "\n";
         }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.rucafe.R;
+import com.example.rucafe.models.MenuItem;
 import com.example.rucafe.models.Order;
 import com.example.rucafe.models.StoreOrders;
 import java.text.DecimalFormat;
@@ -19,15 +20,20 @@ import java.text.DecimalFormat;
  * The Activity class that creates the store orders GUI display.
  * @author Taze Balbosa, Yulie Ying
  */
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("$###,##0.00");
+    private static final int NOT_CHECKED = 0;
+    private static final int CHECKED = 1;
 
     private TextView tv_totalPrice, tv_salesTax, tv_subtotal;
     private ListView lv_storeOrderListView;
     private Button btn_removeOrder, btn_showOrder;
+    private MenuItem currentItem;
     private Order currentOrder;
     private StoreOrders currentStoreOrder;
     double total, subtotal, salesTax;
+
+    private int checkedOrder = NOT_CHECKED;
 
     /**
      * Creates and starts the store order menu UI.
@@ -59,21 +65,7 @@ public class StoreActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        lv_storeOrderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            /**
-             * Processes action when clicking a specific order in store orders list.
-             * @param parent The AdapterView where the selection happened.
-             * @param view The view within the AdapterView that was clicked.
-             * @param position The position of the view in the adapter.
-             * @param id The row id of the item that is selected.
-             */
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentOrder = (Order) lv_storeOrderListView.getItemAtPosition(position);
-                btn_showOrder.setEnabled(true);
-                btn_removeOrder.setEnabled(true);
-            }
-        });
+        lv_storeOrderListView.setOnItemClickListener(this);
 
         btn_removeOrder.setOnClickListener(v -> {
             this.removeOrderFromStore();
@@ -85,6 +77,18 @@ public class StoreActivity extends AppCompatActivity {
 
 
         this.updateUI();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (checkedOrder == NOT_CHECKED) {
+            currentOrder = (Order) lv_storeOrderListView.getItemAtPosition(i);
+            btn_showOrder.setEnabled(true);
+            btn_removeOrder.setEnabled(true);
+        }
+        else if (checkedOrder == CHECKED) {
+            currentItem = (MenuItem) lv_storeOrderListView.getItemAtPosition(i);
+        }
     }
 
     /**
@@ -109,6 +113,7 @@ public class StoreActivity extends AppCompatActivity {
         lv_storeOrderListView.clearChoices();
         lv_storeOrderListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentOrder.getOrderList()));
         this.btn_showOrder.setEnabled(false);
+        checkedOrder = CHECKED;
     }
 
     /**
