@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 //**************
-import android.widget.*; //Java automatically consolidated all the imports for widget to this.
+import android.widget.*; //Java automatically consolidated all the imports for widgets to this.
 //**************
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;

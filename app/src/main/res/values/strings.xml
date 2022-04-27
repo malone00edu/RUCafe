@@ -74,7 +74,7 @@
     <string name="add">Add</string>
     <string name="remove">Remove</string>
     <string name="current_price">Current Price:</string>
-    <string name="sub_total">Subtotal: </string>
+    <string name="sub_total">Subtotal:</string>
     <string name="sales_tax">Sales Tax:</string>
     <string name="total">Total:</string>
     <string name="remove_selected_item">Remove Item</string>

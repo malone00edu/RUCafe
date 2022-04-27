@@ -56,7 +56,7 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
         donuts = (ArrayList<Donut>) getIntent().getSerializableExtra("Donuts");
         Button addToOrder = (Button) findViewById(R.id.btn_addToOrder);
         subtotal = (TextView) findViewById(R.id.tv_subtotal);
-        subtotal.setText(getString(R.string.sub_total) + getString(R.string.default_price));
+        subtotal.setText(getString(R.string.sub_total) + getString(R.string.dollar) + getString(R.string.default_price));
 
         RecyclerView rcview = findViewById(R.id.rcView_menu);
         donutItems = setupMenuItems();
@@ -75,7 +75,7 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
                 for(Item selectedDonutItem : donutItems) {
                     tallySelectedDonuts(selectedDonutItem, donuts);
                 }
-                subtotal.setText(getString(R.string.sub_total) + calculateAndDisplayPrice());
+                subtotal.setText(getString(R.string.sub_total) + getString(R.string.dollar) +calculateAndDisplayPrice());
             }
         });
 
@@ -90,7 +90,7 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
                 for(Item selectedDonutItem : donutItems) {
                     tallySelectedDonuts(selectedDonutItem, donuts);
                 }
-                subtotal.setText(getString(R.string.sub_total) + calculateAndDisplayPrice());
+                subtotal.setText(getString(R.string.sub_total) + getString(R.string.dollar) + calculateAndDisplayPrice());
             }
         });
 
@@ -146,7 +146,8 @@ public class DonutActivity extends AppCompatActivity implements OnItemsClickList
     }
 
     /**
-     * Helper method that updates the Donut object by viewing an Item object's quantity.
+     * Helper method that updates the Donut object by viewing an Item object's quantity
+     * and adjusting accordingly.
      * @param selectedDonutItem The quantity selected from a particular donut object Item.
      * @param donuts The Donut objects whose quantity will be updated.
      */
