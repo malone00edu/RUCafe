@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Stores information for a menu order. Subclass of all other menu items.
  * @author Taze Balbosa, Yulie Ying
  */
-public class MenuItem implements Serializable {
+public class MenuItems implements Serializable {
 
     private static final double INITIAL_PRICE = 0;
     protected double price;
@@ -16,7 +16,7 @@ public class MenuItem implements Serializable {
      * Create a Menu Item type that stores menu item order information.
      * @param quantity Initial quantity of menu item.
      */
-    public MenuItem(int quantity) {
+    public MenuItems(int quantity) {
         this.price = INITIAL_PRICE;
         this.quantity = quantity;
     }

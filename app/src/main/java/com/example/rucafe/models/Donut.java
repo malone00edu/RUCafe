@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Stores information for a donut order.
  * @author Taze Balbosa, Yulie Ying
  */
-public class Donut extends MenuItem implements Serializable {
+public class Donut extends MenuItems implements Serializable {
     private static final double INITIAL_PRICE = 0;
 
     private String donutType, donutFlavor;

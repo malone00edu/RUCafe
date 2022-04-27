@@ -7,7 +7,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.rucafe.MainActivity;
 import com.example.rucafe.R;
-import com.example.rucafe.models.MenuItem;
+import com.example.rucafe.models.MenuItems;
 import com.example.rucafe.models.Order;
 import java.text.DecimalFormat;
 
@@ -22,7 +22,7 @@ public class OrderActivity extends AppCompatActivity {
     private ListView lv_orderListView;
     private Button btn_removeItem, btn_placeOrder;
     private Order currentOrder;
-    private MenuItem currentItem;
+    private MenuItems currentItem;
     double total, subtotal, salesTax;
 
     /**
@@ -63,7 +63,7 @@ public class OrderActivity extends AppCompatActivity {
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentItem = (MenuItem) lv_orderListView.getItemAtPosition(position);
+                currentItem = (MenuItems) lv_orderListView.getItemAtPosition(position);
                 btn_removeItem.setEnabled(true);
             }
         });
