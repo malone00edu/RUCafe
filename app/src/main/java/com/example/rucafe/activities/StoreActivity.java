@@ -98,17 +98,6 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (checkedOrder == CHECKED) {
-            this.updateUI();
-            checkedOrder = NOT_CHECKED;
-        }
-        else {
-            super.onBackPressed();
-        }
-    }
-
     /**
      * Removes an order from the store orders list.
      */

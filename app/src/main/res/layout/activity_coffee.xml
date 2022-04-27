@@ -101,7 +101,7 @@
 
                 <TextView
                     android:id="@+id/creamAmtNum"
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:paddingTop="5sp"
                     android:textAlignment="center"
@@ -156,7 +156,7 @@
 
                 <TextView
                     android:id="@+id/milkAmtNum"
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:paddingTop="5sp"
                     android:textAlignment="center"
@@ -211,7 +211,7 @@
 
                 <TextView
                     android:id="@+id/whippedAmtNum"
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:paddingTop="5sp"
                     android:textAlignment="center"
@@ -267,7 +267,7 @@
 
                 <TextView
                     android:id="@+id/caramelAmtNum"
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:paddingTop="5sp"
                     android:textAlignment="center"
@@ -322,7 +322,7 @@
 
                 <TextView
                     android:id="@+id/syrupAmtNum"
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:paddingTop="5sp"
                     android:textAlignment="center"
