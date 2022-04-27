@@ -12,6 +12,7 @@ import android.widget.Toast;
 import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.rucafe.R;
+import com.example.rucafe.models.MenuItems;
 import com.example.rucafe.models.Order;
 import com.example.rucafe.models.StoreOrders;
 import java.text.DecimalFormat;
@@ -28,7 +29,7 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
     private TextView tv_totalPrice, tv_salesTax, tv_subtotal;
     private ListView lv_storeOrderListView;
     private Button btn_removeOrder, btn_showOrder;
-    private MenuItem currentItem;
+    private MenuItems currentItem;
     private Order currentOrder;
     private StoreOrders currentStoreOrder;
     double total, subtotal, salesTax;
@@ -94,7 +95,7 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
             btn_removeOrder.setEnabled(true);
         }
         else if (checkedOrder == CHECKED) {
-            currentItem = (MenuItem) lv_storeOrderListView.getItemAtPosition(i);
+            currentItem = (MenuItems) lv_storeOrderListView.getItemAtPosition(i);
         }
     }
 
