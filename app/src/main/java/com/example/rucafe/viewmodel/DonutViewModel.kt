@@ -40,7 +40,7 @@ class DonutViewModel : ViewModel() {
         return donuts
     }
 
-    // Contains constants to be accessed in a static way.
+    // Contains constants to be accessed in a static way
     // ZERO is used to define the initial quantity of donuts
     companion object {
         private const val ZERO = 0
