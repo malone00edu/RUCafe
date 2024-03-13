@@ -10,26 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecyclerViewSampleCode">
 
-        <activity android:name="com.example.rucafe.activities.CoffeeActivity" android:exported="false">
+        <activity android:name="com.example.rucafe.activity.CoffeeActivity" android:exported="false">
 
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity" />
         </activity>
 
-        <activity android:name="com.example.rucafe.activities.DonutActivity" android:exported="false">
+        <activity android:name="com.example.rucafe.activity.DonutActivity" android:exported="false">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity" />
         </activity>
 
-        <activity android:name="com.example.rucafe.activities.OrderActivity" android:exported="false">
+        <activity android:name="com.example.rucafe.activity.OrderActivity" android:exported="false">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity" />
         </activity>
 
-        <activity android:name="com.example.rucafe.activities.StoreActivity" android:exported="false">
+        <activity android:name="com.example.rucafe.activity.StoreActivity" android:exported="false">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity" />
