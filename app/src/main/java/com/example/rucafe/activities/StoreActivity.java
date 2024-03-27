@@ -56,7 +56,7 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
         btn_showOrder = (Button) findViewById(R.id.btn_showOrder);
 
         lv_storeOrderListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        lv_storeOrderListView.setSelector(R.color.design_default_color_primary);
+        lv_storeOrderListView.setSelector(com.google.android.material.R.color.design_default_color_primary);
 
     }
 
@@ -175,10 +175,7 @@ public class StoreActivity extends AppCompatActivity implements AdapterView.OnIt
             onBackPressed();
             return true;
         }
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.home) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

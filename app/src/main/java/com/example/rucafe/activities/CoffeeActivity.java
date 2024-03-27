@@ -1,5 +1,6 @@
 package com.example.rucafe.activities;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,11 +38,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Coffee coffee = new Coffee(INITIAL_QTY, CoffeeSize.SHORT.getName(), INITIAL_ADD_IN_QTY,
             INITIAL_ADD_IN_QTY, INITIAL_ADD_IN_QTY, INITIAL_ADD_IN_QTY, INITIAL_ADD_IN_QTY);
 
-    private int quantity = 0;
-    private String coffeeSize = "";
-
     private String coffeePrice = "";
-    private int coffeeQuantity = ZERO;
 
     private Spinner coffeeSizeSpinner, coffeeQtySpinner;
 
@@ -147,6 +144,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
      * @param i The position of the view in the adapter.
      * @param l The row id of the item that is selected.
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
@@ -179,6 +177,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
      * @param buttonView The compound button view whose state has changed.
      * @param isChecked The new checked state of buttonView.
      */
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch(buttonView.getId()) {
@@ -261,6 +260,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
      * Listener method for coffee UI buttons.
      * @param view The view that was clicked.
      */
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onClick(View view) {
         switch(view.getId()) {

@@ -43,7 +43,7 @@ public class OrderActivity extends AppCompatActivity {
         btn_placeOrder = (Button) findViewById(R.id.btn_showOrder);
         btn_removeItem = (Button) findViewById(R.id.btn_removeStoreOrder);
         lv_orderListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        lv_orderListView.setSelector(R.color.design_default_color_primary);
+        lv_orderListView.setSelector(com.google.android.material.R.color.design_default_color_primary);
     }
 
     /**
