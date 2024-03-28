@@ -2,6 +2,7 @@ RUCafe
 
     Welcome to the RUCafe repository! 
     This project is a coffee shop management system developed by Taze Balbosa and Yulie Ying.
+    (With some help from Professor Lily Chang)
 
 About
 
