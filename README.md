@@ -1,6 +1,7 @@
 RUCafe
 
-    Welcome to the RUCafe repository! This project is a coffee shop management system developed by Taze Balbosa and Yulie Ying.
+    Welcome to the RUCafe repository! 
+    This project is a coffee shop management system developed by Taze Balbosa and Yulie Ying.
 
 About
 
@@ -10,12 +11,16 @@ About
 Features
 
     Order Selection: 
-        Coffee is selected with the use of checkboxes and dropdown menus and buttons for increment and decrement.  
+        Coffee is selected with the use of checkboxes and dropdown menus and 
+        buttons for increment and decrement.  
         Donuts are selected with the use of a RecyclerView and butoons for increment and decrement.
+        
     Cart Management: 
         Create and modify your selection with the use of a cart within the app.
+        
     Store order history: 
-        Manage completed orders within the store by viewing the order details or deleting orders within the app.
+        Manage completed orders within the store by viewing the order details 
+        or deleting orders within the app.
 
 Installation
 
