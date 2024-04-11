@@ -4,6 +4,8 @@ RUCafe
     This project is a coffee shop management system developed by Taze Balbosa and Yulie Ying.
     (With some help from Professor Lily Chang)
 
+https://github.com/malone00edu/RUCafe/assets/93667152/4bc87265-82de-4fb2-b937-c975ff9327e6
+
 About
 
     The RUCafe project aims to streamline coffee shop operations through the use of an Android app. 
@@ -42,9 +44,3 @@ Contributing
 License
 
     This project is licensed under the MIT License. See the LICENSE file for details.
-
-
-https://github.com/malone00edu/RUCafe/assets/93667152/4bc87265-82de-4fb2-b937-c975ff9327e6
-
-
-
