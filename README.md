@@ -40,7 +40,3 @@ Usage
 Contributing
 
     Contributions are welcome! Please feel free to fork and alter to your heart's content.
-
-License
-
-    This project is licensed under the MIT License. See the LICENSE file for details.
